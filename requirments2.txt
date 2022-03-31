@@ -1,0 +1,12 @@
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('maxent_ne_chunker')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('words')
+nltk.download('stopwords')
+nltk.download('words')
+nltk.download('wordnet')
+nltk.download('omw-1.4')
+python -m spacy download en_core_web_sm
+python -m nltk.downloader words
+python -m nltk.downloader stopwords

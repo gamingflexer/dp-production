@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
+    <script src="https://kit.fontawesome.com/2360843bb3.js" crossorigin="anonymous"></script>
+    
+    <title>Document</title>
+</head>
+<body>
+ <h1>Project Name</h1>
+    <div class="searchfix">
+        <form>
+            <div class="searcharea">
+            <input type="text" id="searchbox" class="search" placeholder=" search here ">
+            <!-- 
+            <i input type="submit" class="fa fa-search"></i>
+            -->    
+            <a href="#"><button type="submit"class="sub" ><i class="fa fa-search" ></i></button></a>
+            
+            </div>
+        </form>
+    </div>
+    
+        <div class="logo">
+            <ul>
+                <li class="logo1"><a href="#"><i class="fa-brands fa-microsoft"></i></a></li>
+                <li class="logo1"><a href="#"><img src="static\4.png" class="home"></a></li>
+                <li class="logo1"><a href="#"><img src="static\3.png" class="candiate"></a></li>
+                <li class="logo1"><a href="#"><img src="static\1.png" class="statistic"></a></li>
+                <li class="logo1"><a href="#"><img src="static\2.png" class="setting1"></a></li>
+                <li class="logo1"><a href="#"><img src="static\5.png" class="setting"></a></li>
+
+
+
+
+            </ul>
+            
+        </div>
+        <div class="scroll">
+            
+                <table class="table_dis">
+                    <div class="tabular" >
+                    <th>check</th>
+                    <th>Name</th>
+                    <th>Admission No </th>
+                    <th>Phone No</th>
+                    <th>email id</th>
+                    <th>link of resume</th>
+                    <div class="data">
+                        {% for data in row %}
+                        <tr>
+                            <td><input type="checkbox" class="checkit"></td>
+                            
+
+                        {% for item in data %} 
+                        
+                        <td>{{item}}</td>
+                        {% endfor %}
+                        <td><a href="#">resume</a></td>
+                        </tr>
+                        {% endfor %}
+                    </div>
+                    </div>
+                </table>
+            
+    </div>
+       
+  
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/signup.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="con">
+        <img src="static\image\loginnew.png"  class="signup">
+        
+        <div class="signupform">
+           
+            <div class="sub_signup">
+              
+            <form action="/user" class="loginform1" method="post">
+                <div class="out_head">
+                <p id="wel_head"><b>Welcome</b></p><br>
+                 </div>
+                <label for="can_email" class="emailid" >Email-id :</label><br>
+                <input type="email" id="can_email" name="emailid" class="can_email"  required><br>
+                <label for="can_pass" class="pass">Password :</label><br>
+                <input type="password" id="can_pass" class="can_pass" name="pass" required><br>
+                <label for="can_repass" class="pass">Re-Enter Password :</label><br>
+                <input type="password" id="can_repass" class="can_pass" name="repass" required><br><br>
+                <p id="invalid"></p>
+                <a href="/">login in </a>
+                <div class="out_sub">
+                <input type="submit" value="Submit" class="sub" name="pass">
+                </div>
+             
+               
+            </form>
+        
+           </div>
+        
+        </div>
+    </div>
+    <script>
+        if('{{repassconditions}}'=='True'){
+            const data=document.getElementById('invalid');
+            data.innerHTML='Mismatch Password';
+        }
+    </script>
+</body>
+</html>

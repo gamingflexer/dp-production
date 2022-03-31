@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/loginpage.css">
+</head>
+<body>
+    <div class="con">
+        <img src="static\image\loginnew.png"  class="login">
+
+
+        <div class="loginform">
+           
+            <div class="sub_login">
+              
+            <form action="/verify" class="loginform1" method="post">
+                <div class="out_head">
+                <p id="wel_head"><b>Welcome</b></p><br>
+                 </div>
+                <label for="can_email" class="emailid" >Email-id :</label><br>
+                <input type="email" id="can_email" name="emailid" class="can_email" required><br>
+                <label for="can_pass" class="pass">Password :</label><br>
+                <input type="password" id="can_pass" class="can_pass" name="pass" required><br><br>
+                <p id="invalid"></p>
+                <a href="/signup">Create Account </a>
+                <div class="out_sub">
+                <input type="submit" value="Log in" class="sub" name="pass">
+                </div>
+             
+               
+            </form>
+        
+           </div>
+        
+        </div>
+    </div>
+    <script>
+        if('{{passconditions}}'=='True'){
+            const data=document.getElementById('invalid');
+            data.innerHTML='Invalid password';
+        }
+
+        if('{{conditions}}'=='True'){
+            const cont=document.getElementById('invalid');
+            cont.innerHTML='Invalid User'
+
+        }
+    </script>
+    
+</body>
+</html>

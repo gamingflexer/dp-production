@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='table2.css') }}">
+    
+    <script src="https://kit.fontawesome.com/2360843bb3.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="static\table2.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="logo">
+        <ul>
+            <li class="logo1"><a href="/home"><i class="fa-brands fa-microsoft"></i></a></li>
+            <li class="logo1"><a href="/upload2"><img src="static\image\4.png" class="home"></a></li>
+            <li class="logo1"><a href="/table"><img src="static\image\3.png" class="candiate"></a></li>
+            <li class="logo1"><a href="/statistic"><img src="static\image\1.png" class="statistic"></a></li>
+            <li class="logo1"><a href="#"><img src="static\image\2.png" class="setting1"></a></li>
+            <li class="logo1"><a href="#"><img src="static\image\5.png" class="setting"></a></li>
+            <li class="logo1"><a href="#"><img src="static\image\acc.png" class="account"></a></li>
+
+
+
+
+        </ul>
+        
+    </div>
+    <div class="con">
+        <h1>Project Name</h1>
+        <!-- <div class="searchfix"> -->
+           
+                <div class="searcharea">
+                <input type="text" id="searchbox" class="search" placeholder=" search here " onkeyup="searchFun()">
+                <!-- 
+                <i input type="submit" class="fa fa-search"></i>
+                -->    
+                <button class="sub" ><i class="fa fa-search" ></i></button>
+                
+                </div>
+            
+        <!-- </div> -->
+        <div class="formcontent">
+        <form action="/compare" method="post">
+            
+            
+            <div class="buttons">
+                <div class="compbtn">
+                 <input type="submit" value="Compare" class="comp">
+                </div>
+               <div class="export">
+                <a href="#" onclick="print.window()" class="exp">Export</a>
+               </div>
+            </div>   
+               <div class="scroll">
+                <table class="table_dis"  id="table_data">
+                    
+                    <div class="tabular" >
+                    <tr>   
+                        
+                        <th > </th>    
+                        <th>Candiate Id</th>
+                        <th>Name</th>
+                        <th>Education </th>
+                        <th>Skills</th>
+                        <th>Experience</th>
+                        <th>Email</th>
+                        <th >Link Of Resume</th>
+                       
+                    </tr>
+                    
+                    <div class="data">
+                        {% set count = namespace(value=1) %}
+                        
+                    {% for data in row %}
+                    
+                        {% set can_id = 'id' + count.value | string() %}
+
+                        {% set count.value = count.value + 1 %}
+                        <tr class="{{can_id}}">
+                            
+                            <td class="check" id="{{count.value-1}}"><input type="checkbox" class="checkit" name="check" value="{{count.value-1}}"></td>
+
+                        {% for item in data %} 
+                        
+                        
+                        <td>{{item}}</td>
+                        
+                        
+                        {% endfor %}
+                        <td><a href="#">resume</a></td>
+                        </tr>
+                    
+                    {% endfor %}
+                    </div>
+                    </div>
+                </table>
+                
+            </div>
+            
+        </form>
+
+    </div>
+    
+    </div>
+    <!-- <script>
+        function printDiv() {
+            var divContents = document.getElementById("table_data").innerHTML;
+            var a = window.open('', '', 'height=500, width=500');
+            a.document.write('<html>');
+            a.document.write('<body > <h1>Div contents are <br>');
+            // a.document.write(\ )    
+            a.document.write(divContents.outerHTML);
+            a.document.write('</body></html>');
+            a.document.close();
+            a.print();
+        }
+    </script> -->
+</body>
+</html>

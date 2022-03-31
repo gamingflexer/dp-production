@@ -1,0 +1,139 @@
+
+@import url("https://tonts. goog-capis:com/055family=Poppins:400,700| Open+Sans: 400") ;
+*{
+    margin:0;
+    padding:0;
+   
+}
+html{
+    font-size: 62.6%;
+}
+body{
+   
+    
+    font-size: 'Montserrat';
+    height: 100vh ;
+    background: linear-gradient(to left,rgba(224,224,224),rgba(169,169,169,1));
+    background-position: bottom ;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    
+}
+p{
+    font-size: 3rem;
+    letter-spacing: 0.25rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+a{
+    text-decoration:none;
+}
+
+li{
+    list-style: none;
+}
+h2{
+    font-size: 2rem;
+}
+
+  
+ /*p{
+    margin-top: 1rem;
+     font-size: 3.5rem;
+    text-transform:uppercase ;
+    text-align: center;
+    position: relative;
+    
+}*/
+
+
+.logo{
+    float: left;
+    position: relative;
+    width: 2rem;
+    background-color: white;
+    box-shadow: 0.1rem 0.2rem 0.8rem black;
+    height: 100%;
+    padding: 2rem; 
+    
+    
+ }
+ .setting1,.home ,.statistic,.candiate ,.account{
+     width: 2.2rem;
+}
+.home{
+    margin-top: 2rem;
+}
+.setting1{
+    margin-top: 2rem;
+}
+.home ,.statistic,.candiate{
+    margin-left: -2.2rem;
+    width:7rem ;
+
+}
+.fa-microsoft{
+    font-size: 2rem;
+    color: black;
+   
+}
+.setting{
+   margin-top: 25rem;
+   width: 2.4rem;
+}
+.account{
+    width: 5.6rem;
+    margin-left: -2.1rem;
+    
+}
+
+
+
+.con{
+   
+    text-align: center;
+    
+}
+.pagehead{
+    display: inline-block;
+     /* border: 2px solid black;  */
+     position: absolute;
+     /* left: 50%;
+     margin-left: 10px; */
+   text-transform:uppercase ;
+    /* margin-top: 1rem; */
+   
+    left: 50%;
+    top: 4rem;
+   
+  transform: translate(-50%,-50%);   
+}
+
+.btn{
+    /* margin-top: 1.1rem; */
+    display: inline-block;
+    color: blue;
+    font-size: 1.5rem;
+    font-weight: 500;
+    /* height: 5rem;
+    width: 12rem; */
+   /* padding-top: 1.4rem; */
+   text-align: center;
+   padding: 1rem;
+   padding-left: 1.7rem;
+   padding-right: 1.7rem;
+    background-color: white;
+    border-radius: 50px;
+}
+
+.sub_con{
+       
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+    
+}

@@ -1,0 +1,229 @@
+@import url("https://tonts. goog-capis:com/055family=Poppins:400,700| Open+Sans: 400") ;
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    font-size: 62.6%;
+    display: inline-block;
+   
+}
+body{
+    background: rgb(27,101,152);
+    background: linear-gradient(90deg, rgba(27,101,152,1) 12%, rgba(11,164,204,1) 51%, rgba(18,173,213,1) 100%);
+    height: 94.5vh;
+}
+.logo{
+    
+    
+    float: left;
+    position:relative; 
+    
+    width: 2rem;
+    background-color: white;
+    box-shadow: 0.1rem 0.2rem 0.8rem grey;
+     height: 100%;  
+    padding: 2rem;
+    
+    
+ }
+ ul{
+    list-style-type: none;
+}
+a{
+    text-decoration: none;
+    color: #FFDB58;
+    text-align: center;
+}
+.setting1,.home ,.statistic,.candiate ,.account{
+     
+     width: 2.2rem;
+ }
+ .home{
+     margin-top: 2rem;
+ }
+ .setting1{
+     margin-top: 2rem;
+ }
+ .home ,.statistic,.candiate{
+     margin-left: -2.2rem;
+     width:7rem ;
+
+ }
+ .fa-microsoft{
+     font-size: 2rem;
+     color: black;
+    
+ }
+ .setting{
+    margin-top: 25rem;
+    width: 2.4rem;
+ }
+ .account{
+     width: 5.6rem;
+     margin-left: -2.1rem;
+     
+ }
+ .projectname{
+     position: relative;
+     margin-top: 2.5rem;
+     margin-left: 2rem;
+     width: 20%;
+     height: 2rem;
+     border-radius: 2rem;
+     padding: 0.6rem;
+     color: black;
+     font-weight: 1000;
+ }
+ .sub_wrapper{
+     /* display: inline-block;  */
+     
+     position: absolute; 
+     border: 2px solid black;
+     border-radius: 2rem;
+     padding: 2rem;
+      top: 50%;
+      left: calc(50% + 2rem) ;
+      transform: translate(-50%,-50%);  
+      text-align: center;
+      z-index: 2;
+ }
+ i{
+     font-size: 7rem;
+ }
+ p{
+     font-size: 2rem;
+ }
+ .file-input{
+     border: 0.7rem solid black;
+ }
+ .btn{
+     background-color: #0d59a1;
+     color: white;
+     padding: 0.8rem;
+     border: 0.3rem solid lightgreen;
+     border-radius: 0.5rem;
+     font-weight: 700;
+ }
+ .uploadbtn{
+    background-color: lightgreen;
+    color: white;
+    padding: 0.8rem;
+    border: 0.3rem solid lightgreen;
+    border-radius: 0.5rem;
+    font-weight: 700;
+ }
+
+ .cleanbtn{
+    
+    background-color: #0d59a1;
+    color: white;
+    padding: 0.7rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border: 0.3rem solid lightgreen;
+    border-radius: 0.5rem;
+    font-size: 1.7rem;
+    font-weight: 700;
+    
+ }
+ .cbutton{
+     padding: 0.5rem;
+ }
+ .style1{
+     display: inline-block;
+    position: absolute; 
+     top: 50%;
+    left: calc(50% + 2rem); 
+    /* width: 100%;
+    height: 100vh;  */
+     transform: translate(-50%,-50%); 
+    z-index: 100;
+   background-color: #0d59a1;
+   background-size: cover; 
+    
+  }
+  #loadingimg{
+      padding: 25rem;
+  }
+  #error{
+      padding-top: 1rem;
+      font-size: 1.4rem;
+      word-wrap: break-word;
+      color: red;
+  }
+.backgroundcube{
+    display: flex; 
+    background-color: white;
+    height: 100vh;
+}
+ 
+.cube {
+    margin: auto;
+    font-size: 24px;
+    height: 1em;
+    width: 1em;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: cube-spin 1.5s infinite ease-in-out alternate both;
+
+    z-index: 1000;
+}
+.side {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform-style: preserve-3d;
+}
+.side::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: currentcolor;
+    transform: translatez(0.5em);
+    animation: cube-explode 1.5s infinite ease-in-out;
+    opacity: 0.5;
+}
+.side:nth-child(1) {
+    transform: rotatey(90deg);
+}
+.side:nth-child(2) {
+    transform: rotatey(180deg);
+}
+.side:nth-child(3) {
+    transform: rotatey(270deg);
+}
+.side:nth-child(4) {
+    transform: rotatey(360deg);
+}
+.side:nth-child(5) {
+    transform: rotatex(90deg);
+}
+.side:nth-child(6) {
+    transform: rotatex(270deg);
+}
+@keyframes cube-spin {
+    0% {
+        transform: rotatex(35.264deg) rotatey(45deg);
+   }
+    100% {
+        transform: rotatex(35.264deg) rotatey(405deg);
+   }
+}
+@keyframes cube-explode {
+    0% {
+        transform: translatez(0.5em);
+   }
+    50% {
+        transform: translatez(0.75em);
+   }
+    100% {
+        transform: translatez(0.5em);
+   }
+}

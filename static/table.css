@@ -1,0 +1,127 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: white;
+}
+html{
+    font-size: 62.6%;
+}
+h1{
+    margin-top: 3rem;
+    margin-left: 0.7rem;
+}
+.cont{
+    background-color: #EBCBCB;
+}
+.searcharea{
+    position: fixed;
+    
+    width: 80%;
+    height: 2.5rem;
+    float: left;
+    
+}
+.search{
+    position: relative;
+    
+    
+    width: 40%;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    margin-top: 2rem;
+    margin-left: 15rem;
+   
+}
+.sub{
+    position:relative;
+    z-index: 1;
+    margin-left: -2.5rem;
+    border: white;
+    background-color: white;
+    width: 2rem;
+    height: 2.5rem;
+}
+
+th{
+    padding: 1rem;
+    font-size: 1.5rem;
+    text-align: left;
+    width: 20rem;
+
+    
+}
+
+tr{
+    font-size: 1rem;
+    text-align: left;
+}
+td{
+    font-size: 1.2rem;
+    padding: 0.5rem;
+}
+.cont{
+    position: fixed;
+    
+}
+.table_dis{
+    display: block;
+    position: fixed;
+    width: 90%;
+    background-color: #EBCBCB;
+    margin-left: 8rem;
+    float: left;
+    margin-top: 6rem;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+
+    
+
+}
+
+.checkit{
+    align-items: right;
+}
+ul{
+    list-style-type: none;
+}
+a{
+    text-decoration: none;
+}
+.logo{
+    
+    display: inline-block;
+    float: left;
+    position: fixed;
+    margin-top: 5rem;
+    width: 2rem;
+    height: 70%;
+    background-color: aliceblue;
+    padding: 2rem;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+ }
+.setting1,.home ,.statistic,.candiate{
+     margin-top: 3rem;
+     width: 2.2rem;
+ }
+ .home ,.statistic,.candiate{
+     margin-left: -2.2rem;
+   width:7rem ;
+
+ }
+ .fa-microsoft{
+     font-size: 2rem;
+     color: black;
+    
+ }
+ .setting{
+    margin-top: 12rem;
+    width: 2.2rem;
+ }
+
+.data{
+    float: right;
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload resume here</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='upload2.css') }}">
+  <script src="https://kit.fontawesome.com/2360843bb3.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+  <div id="cubebody">
+    <div id="loadcube" >
+    
+      <div id="side1">
+
+      </div>
+      <div id="side2">
+
+      </div>
+      <div id="side3">
+
+      </div>
+      <div id="side4">
+
+      </div>
+      <div id="side5">
+
+      </div>
+      <div id="side6">
+
+      </div>
+  </div>  
+</div>
+  <div id="sidebar" class="logo">
+    <ul>
+        <li class="logo1"><a href="/home"><i class="fa-brands fa-microsoft"></i></a></li>
+        <li class="logo1"><a href="/upload2"><img src="static\image\4.png" class="home"></a></li>
+        <li class="logo1"><a href="/table"><img src="static\image\3.png" class="candiate"></a></li>
+        <li class="logo1"><a href="/statistic"><img src="static\image\1.png" class="statistic"></a></li>
+        <li class="logo1"><a href="#"><img src="static\image\2.png" class="setting1"></a></li>
+        <li class="logo1"><a href="#"><img src="static\image\5.png" class="setting"></a></li>
+        <li class="logo1"><a href="#"><img src="static\image\acc.png" class="account"></a></li>
+
+    </ul>
+    
+</div>
+  <div id="sub_upload" class="wrapper">
+    <!-- <header>File Uploader</header> -->
+    <form action="/upload"  method="post" enctype="multipart/form-data"  >
+      <input class="projectname" value="Project Name" name="projectname" >
+      <div  class="sub_wrapper">
+        <input class="file-input" type="file" name="files[]" id="fileInput" class="form-control" multiple aria-hidden="false"required >
+        <br>
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p>Browse File to Upload</p>
+        <br>
+        <input type="submit" name="submit" class="btn" value="Upload" id="upbtn" onclick="loader()"/>
+        <br>
+        <div class="cbutton">
+          <br>
+          <a href="/delete" class="cleanbtn">Clean</a>
+          </div>
+          <div id="error"></div>
+      </div> 
+    </form>
+    <!-- <img src="static\image\loading2.gif" width="200px" height="200px"> -->
+    
+  </div>
+  
+ <script>
+   const fileSelector = document.getElementById('fileInput');
+   let fileListLength=0;
+    let value=0
+   if(fileListLength==0 || value==1)
+  {
+    document.getElementById("upbtn").disabled = true;
+   
+
+  }
+  fileSelector.addEventListener('change', (event) => {
+    fileListLength=0;
+     value=0
+    const fileList = event.target.files;
+
+    console.log(fileList.length);
+    let allowedextension=['txt', 'pdf', 'png', 'jpg','jpeg', 'docx', 'doc', 'rtf', 'odt', 'html', 'txt', 'zip','rar'];
+    console.log(allowedextension);                     
+    console.log(fileList[0]['name'].lastIndexOf('.',))
+    let indexno=fileList[0]['name'].lastIndexOf('.',)
+    console.log(fileList[0]['name'].slice(indexno+1,))
+    fileListLength=fileList.length
+    for(let i=0;i<fileList.length;i++)
+    {
+      let indexno=fileList[i]['name'].lastIndexOf('.',)
+      let extension=fileList[i]['name'].slice(indexno+1,)
+      if(allowedextension.includes(extension)){
+        console.log(allowedextension.includes(extension))
+
+
+
+      }
+      else{
+        const data=document.getElementById('error');
+        data.innerHTML='Invalid extension we accept only txt, pdf, png, jpg, jpeg, docx, doc, rtf, odt, html, txt, zip';
+        value=1;
+        console.log(allowedextension.includes(extension))
+
+        break;
+      }
+      
+      
+
+
+    }
+    console.log(fileListLength ,value)
+      if(fileListLength!=0 && value!=1){
+        document.getElementById("upbtn").disabled = false;
+        document.getElementById('upbtn').setAttribute("class","uploadbtn");
+
+      }
+      else if(fileListLength==0 || value==1)
+      {
+    document.getElementById("upbtn").disabled = true;
+   
+
+  }
+
+  });
+  
+   
+   
+  function loader(){
+  //   var elem = document.createElement("img");
+  //   elem.setAttribute("src", "static\\image\\loading2.gif");
+  //  elem.setAttribute("height", "350rem");
+  //  elem.setAttribute("width", "350rem");
+  // elem.setAttribute("alt", "loading");
+  // elem.setAttribute("id", "loadimg");
+  // document.getElementById("load").appendChild(elem);
+  //   const data=document.getElementById('load');
+  //   document.getElementById('load').setAttribute("class","style1");
+    document.getElementById('cubebody').setAttribute("class","backgroundcube");
+    document.getElementById('loadcube').setAttribute("class","cube");
+    document.getElementById('side1').setAttribute("class","side");
+    document.getElementById('side2').setAttribute("class","side");
+    document.getElementById('side3').setAttribute("class","side");
+    document.getElementById('side4').setAttribute("class","side");
+    document.getElementById('side5').setAttribute("class","side");
+    document.getElementById('side6').setAttribute("class","side");
+    document.getElementById('sub_upload').setAttribute("visibility","hidden");
+    document.getElementById('sub_upload').style.display="none";
+    document.getElementById('sidebar').style.display="none";
+
+
+  }
+</script> 
+  
+    
+
+</body>
+</html>

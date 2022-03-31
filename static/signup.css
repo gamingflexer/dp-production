@@ -1,0 +1,144 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-size: 62.6%;
+}
+body{
+    /* background-color: rgb(207, 235, 246); */
+    background: rgb(27,101,152);
+background: linear-gradient(90deg, rgba(27,101,152,1) 12%, rgba(11,164,204,1) 51%, rgba(18,173,213,1) 100%);
+
+}
+p{
+    font-size: 2rem;
+    
+}
+.con{
+    display: flex;
+    
+    margin: 10rem;
+    border: 2px solid black;
+     border-radius: 5rem;  
+    
+    
+   
+}
+ .signup{
+
+    width:50%; 
+   border-top-left-radius: 5rem;
+   border-bottom-left-radius: 5rem;
+  
+} 
+
+  .signupform{
+     /* display: inline-block;*/
+     position: relative;  
+
+     /* border:2px solid black; 
+     border-top-right-radius: 5rem;
+     border-bottom-right-radius: 5rem; */
+
+    
+      width: 50%; 
+      background: rgb(168,211,241);
+    background: linear-gradient(90deg, rgba(168,211,241,1) 36%, rgba(18,173,213,1) 100%);
+    border-top-right-radius: 5rem;
+    border-bottom-right-radius: 5rem;
+     
+}  
+ .sub_signup{
+     
+     position:absolute;
+     top: 50%;
+      left: 50%;
+     transform: translate(-50%,-50%);
+     padding: 8rem; 
+    border: 2px solid black;
+    /* background-color: #5382E8; */
+    background-color: #6A94F0;
+    border-radius: 4rem;
+ }
+ .can_email ,.can_pass{
+    border-radius: 1rem;
+    padding: 0.2rem;
+    border: 0.3rem solid #0A74D0;
+     
+ }
+ input:focus{
+    border: 0.4rem solid #064E8D;
+ }
+ label{
+     font-size: 1.8rem;
+     color: white;
+     font-weight: 500;
+ }
+ .sub{
+     margin-top: 1.5rem;
+     position:absolute; 
+     left: 50%;
+     transform: translate(-50%);
+     padding: 0.5rem;
+     width: 8rem;
+
+     background-color: blue;
+     /* color: #0d6ec4; */
+     color: white;
+     font-weight: 400;
+     border-radius: 2rem;
+     border: 0.3rem solid whitesmoke ;
+
+ }
+ .out_sub{
+     padding: 0.4rem;
+ }
+ a{
+     font-size: 1.7rem;
+     color: white;
+ }
+ #wel_head{
+     
+     color: white;
+     font-size: 2.7rem;
+     border-bottom:  0.4rem solid blue;
+     width:10.7rem ;
+ }
+ .out_head{
+     
+    padding-bottom: 1.5  rem;
+
+ }
+ #invalid{
+    font-size: 1.5rem;
+    color: red;
+ }
+/*  
+.emailid{
+    line-height: 3rem;
+    font-size: 2rem;
+}
+.pass{
+    line-height: 3rem;
+    font-size: 2rem;
+}
+.can_email{
+    font-size: 2rem;
+}
+.can_pass{
+    font-size: 2rem;
+}
+.sub{
+    margin-top: 1rem;
+    line-height: 3rem;
+    font-size: 2rem;
+    width: 25.5rem;
+    background-color: blue;
+    color: white;
+}
+a{
+    word-spacing: 0.5rem;
+    font-size: 1.5rem;
+    padding-top: 1.5rem;
+} */

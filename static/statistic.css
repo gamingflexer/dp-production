@@ -1,0 +1,138 @@
+@import url("https://tonts. goog-capis:com/055family=Poppins:400,700| Open+Sans: 400") ;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+html{
+    font-size: 62.6%;
+}
+body{
+
+    background: rgb(27,101,152);
+    background: linear-gradient(90deg, rgba(27,101,152,1) 12%, rgba(11,164,204,1) 51%, rgba(18,173,213,1) 100%);
+    height: 94.5vh; 
+}   
+.logo{
+    
+    
+    float: left;
+    position: fixed;
+    width: 6rem;
+    background-color: white;
+    box-shadow: 0.1rem 0.2rem 0.8rem grey;
+    height: 100%;
+    padding: 2rem;
+    
+    
+ }
+ ul{
+    list-style-type: none;
+}
+a{
+    text-decoration: none;
+}
+.setting1,.home ,.statistic,.candiate ,.account{
+     
+     width: 2.2rem;
+ }
+ .home{
+     margin-top: 2rem;
+ }
+ .setting1{
+     margin-top: 2rem;
+ }
+ .home ,.statistic,.candiate{
+     margin-left:-2.2rem;;
+     width:7rem ;
+
+ }
+ .fa-microsoft{
+     font-size: 2rem;
+     color: black;
+    
+ }
+ .setting{
+    margin-top: 25rem;
+    width: 2.4rem;
+ }
+ .account{
+     width: 5.6rem;
+     margin-left: -2.1rem;
+     
+ }
+
+
+ .charts{
+     
+     display: flex; 
+     margin-left: 10rem;
+      flex-wrap: wrap; 
+     margin-right: 4rem;
+      justify-content: space-between; 
+ }
+ /* .piechart{
+    
+    margin-top: 2rem;
+     font-size: 1.2rem;
+     word-break: break-all;
+     padding: 1rem;
+     background-color:white ;
+
+     width:45rem;
+ }*/
+ .chart_div1{
+     /* position:absolute;
+     top: 50%;
+     left: 50%;
+    transform: translate(-50%,-50%); */
+    font-size: 1.2rem;
+    word-break: break-all;
+    padding: 1rem;
+    background-color:white ;
+    width: 15rem; 
+    
+ } 
+
+ #chart_div1{
+     position: absolute;
+    
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+ }
+ #chart_div2{
+    position: absolute;
+    
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+ }
+ /* #chrt_div3{
+    margin-top: 10rem;
+    width: 40%;
+ } */
+ h2{
+     text-align: center;
+     font-size: 2.5rem;
+     padding: 2rem;
+ }
+ .chart-box{
+    position: relative;
+     background-color: white;
+     width: 45%;
+     height: 250px;
+     margin-top: 4rem;
+ }  
+ .chart2{
+    background-color: white;
+    width: 40%;
+    height: 50px;
+    margin: 10px;
+} 
+.chart3{
+    background-color: white;
+    width: 40%;
+    height: 50px;
+    margin: 10px;
+}   
