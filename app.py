@@ -28,12 +28,15 @@ from simplet5 import SimpleT5
 
 from fileconversion import fileconversion1
 from preprocessing import*
-from linkedIn import *
-from githubs import *
+from preprocessing import dict_clean
+from linkedIn import linked_in_scrap
+from githubs import github_scrape
 from model import*
 from db import *
 from config import *
 from flask_fun import * 
+from constants import *
+
 
 
 
@@ -59,7 +62,6 @@ print('\n NER Model & Summary Loaded!\n')
 # flask
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'cairocoders-ednalan'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Yashw@123@localhost:3306/deepblue'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Yashw@123'

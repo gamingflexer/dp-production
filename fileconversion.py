@@ -45,7 +45,7 @@ def fileconversion1(filename, y):
           except:
               try:
                   text = textract.process(filename)
-                  text = text.decode()
+                  text = text.decode('utf-8')
                   text = text.replace("\n", " ")
                   text = text.replace("\t", " ")
                   text = spell(text)
@@ -112,7 +112,7 @@ def fileconversion1(filename, y):
           except:
               try:
                   text = textract.process(filename)
-                  text = text.decode()
+                  text = text.decode('utf-8')
                   text = text.replace("\n", " ")
                   text = text.replace("\t", " ")
                   text = spell(text)
@@ -163,7 +163,7 @@ def fileconversion1(filename, y):
           except:
               try:
                   text = textract.process(filename)
-                  text = text.decode()
+                  text = text.decode('utf-8')
                   text = text.replace("\n", " ")
                   text = text.replace("\t", " ")
                   text = spell(text)
@@ -201,7 +201,7 @@ def fileconversion1(filename, y):
            except:
                try:
                    text = textract.process(filename)
-                   text = text.decode()
+                   text = text.decode('utf-8')
                    text = text.replace("\n", " ")
                    text = text.replace("\t", " ")
                    text = spell(text)
@@ -232,7 +232,7 @@ def fileconversion1(filename, y):
             try:
                 raw = parser.from_file(filename)
                 text = raw['content']
-                text = text.decode()
+                text = text.decode('utf-8')
                 text = spell(text)
                 text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext = givedata(text)
             except:
@@ -259,7 +259,7 @@ def fileconversion1(filename, y):
             try:
                 raw = parser.from_file(filename)
                 text = raw['content']
-                text = text.decode()
+                text = text.decode('utf-8')
                 text = spell(text)
                 text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext = givedata(text)
             except:
@@ -286,7 +286,7 @@ def fileconversion1(filename, y):
             try:
                 raw = parser.from_file(filename)
                 text = raw['content']
-                text = text.decode()
+                text = text.decode('utf-8')
                 text = spell(text)
                 text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext = givedata(text)
             except:
@@ -313,7 +313,7 @@ def fileconversion1(filename, y):
             try:
                 raw = parser.from_file(filename)
                 text = raw['content']
-                text=text.decode()
+                text=text.decode('utf-8')
                 text = spell(text)
                 text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext = givedata(text)
             except:

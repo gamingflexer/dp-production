@@ -3,7 +3,6 @@ import os
 import spacy
 basepath = os.path.dirname(os.path.realpath(__file__))
 
-
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 #change accordinly
 summary_model = '/Users/cosmos/Documents/DP-ref/Summary-100'
@@ -86,6 +85,9 @@ driver_path = ""
 #     docker = docker + 1
 # else:
 #     print("Docker already running")
+
+en_sm = spacy.load('en_core_web_sm')
+
 
 
 
