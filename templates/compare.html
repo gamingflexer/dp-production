@@ -25,20 +25,21 @@
         </ul>
         
     </div>
+    <h1>Compare</h1><br>
     <div class="box-wrapper">
+        
     {% for data in cont %}
         {% set count = namespace(value=1) %}
         {% set block = 'id' + count.value | string() %}
 
         {% set count.value = count.value + 1 %}
             <div class="block" id="{{block}}">
-            <p>Candiate Id : {{data[0]}}</p><br>
-                <p>Name : {{data[1]}}</p><br>
-            <p>Education : {{data[2]}}</p><br>
-            <p>Skills : {{data[3]}}</p><br>
-            <p>Experience : {{data[4]}}</p><br>
-            <p>Emailid : {{data[5]}}</p><br>
-
+            <p id="headtag">Candiate Id : </p><div class="dataouter"><p id="datacontent">{{data[0]}}</p><br></div>
+            <p id="headtag">Name : </p><div class="dataouter"><p id="datacontent" >{{data[1]}}</p><br></div>
+            <p id="headtag">Education : </p><div class="dataouter"><p id="datacontent datacon">{{data[2]}}</p><br></div>
+            <p id="headtag">Skills : </p><div class="dataouter"> <p id="datacontent">{{data[3]}}</p><br></div>
+            <p id="headtag">Experience : </p><div class="dataouter"><p id="datacontent">{{data[4]}}</p><br></div>
+            <p id="headtag">Email-id : </p><div class="dataouter"><p id="datacontent">{{data[5]}}</p><br></div>
         </div>
     {% endfor %}
 </div>

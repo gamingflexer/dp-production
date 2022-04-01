@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='statistic.css') }}">
    <script src="https://kit.fontawesome.com/2360843bb3.js" crossorigin="anonymous"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>
+</script>
     <title>Document</title>
 </head>
 <body>
@@ -31,121 +33,162 @@
       <h2>Analysis</h2>
     </div>
     <div class="charts">
+      <div class="chart-box"> 
+        <canvas id="myChart0" width="400" height="400"></canvas>
+     </div>
       <div class="chart-box">
-         <div id="chart_div1" ></div> 
+        <canvas id="myChart1"width="400" height="400"></canvas>
       </div>
       <div class="chart-box">
-         <div id="chart_div2" ></div> 
-      </div>
-      <!-- <div class="chart-box">
-         <div id="chart_div3" ></div> 
-      </div> -->
+        <div class="chart-container" >
+            <canvas id="myChart2" width="400" height="400"></canvas>
+        </div>
+      </div>  
+      <div class="chart-box">
+        <canvas id="myChart" width="400" height="400"></canvas>
+      </div>  
       <!-- <div id="chart_div3" style="width: 40%; height: 40%;"></div>  -->
 
     </div>
+
+
+
     <script>
-      
-      
-       
-
-
-      // chart2
-
-      google.charts.load('current', {packages: ['corechart', 'bar']});
-      google.charts.setOnLoadCallback(drawBasic);
-
-function drawBasic() {
-
-      var data = google.visualization.arrayToDataTable([
-        ['Candiates', 'score',],
-        ['Candiates1', 9.5],
-        ['Candiates2', 9],
-        ['Candiates3', 8],
-        ['Candiates4', 7],
-        ['Candiates5', 8]
-      ]);
-
-      var options = {
-        title: 'Candiates score',
-        chartArea: {width: '20%'},
-        hAxis: {
-          title: 'Candiates Score',
-          minValue: 0
-        },
-        vAxis: {
-          title: 'Candiates score'
-        }
-      };
-      var options = {
-           title: 'Company Performance',
-           hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
-          // vAxis: {minValue: 0}
-          'padding':20,
-          'width':500,
-          'height':200
-
-         };
-
-      var chart = new google.visualization.BarChart(document.getElementById('chart_div1'));
-
-      chart.draw(data, options);
+      const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive:true,
     }
-
-    google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
-        ]);
-
-        var options = {
-          title: 'My Daily Activities',
-          'width':500,
-          'height':200
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div3'));
-
-        chart.draw(data, options);
-      }
+});
 
 
-      google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ["Element", "Density", { role: "style" } ],
-        ["Web developer", 8.94, "#b87333"],
-        ["Andriod developer", 10.49, "silver"],
-        ["Java developer", 19.30, "gold"],
-        ["python developer", 21.45, "color: #e5e4e2"]
-      ]);
+const ctx2 = document.getElementById('myChart2').getContext('2d');
+const myChart2 = new Chart(ctx2, {
+    type: 'doughnut',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive:true,
+    }
+});
 
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
 
-      var options = {
-        title: "Number of candiates as per domain",
-        width: 500,
-        height: 200,
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
-      };
-      var chart = new google.visualization.ColumnChart(document.getElementById("chart_div2"));
-      chart.draw(view, options);
-  }
-    </script>
+const ctx1 = document.getElementById('myChart1').getContext('2d');
+const myChart1 = new Chart(ctx1, {
+    type: 'polarArea',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive:true,
+    }
+});
+
+
+
+
+const cxt0  = document.getElementById('myChart0').getContext('2d');
+const myChart0 = new Chart(cxt0 , {
+    type: 'line',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive:true,
+    }
+});
+//'scatter'
+
+
+</script>
 </body>
 </html>

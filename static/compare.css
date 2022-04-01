@@ -7,9 +7,13 @@
 }
 html{
     font-size: 62.6%;
+    height: 100%;
+    
 }
 body{
     background: linear-gradient(90deg, rgba(27,101,152,1) 12%, rgba(11,164,204,1) 51%, rgba(18,173,213,1) 100%);
+    height: 100%;
+    
 }
 .logo{
     
@@ -59,22 +63,83 @@ a{
      margin-left: -2.1rem;
      
  }
+ /* .box-wrapper{
+     display: block;
+    border: 2px solid black;
+     
+    
+     display: flex;
+     flex-wrap: wrap; 
+      align-items: stretch;  
+     position: relative; 
+     flex-direction: row;
+     height: 99%; 
+    justify-content:space-around ;
+     align-content: space-around; 
+    padding: 2rem;
+     overflow: scroll; 
+     
+ } */
+ h1{
+     position:absolute;
+     left: calc(50% - 2rem);
+     padding: 0.2rem ;
+     color: white;
+     font-size: 2.5rem;
+     height: 5rem;
+     /* width: 100%; */
+ }
  .box-wrapper{
-    /* border: 1px solid black; */
+    /* position: relative; */
     margin-left: 6rem;
-    /* margin-right: 10rem; */
+   /* margin-right: -2rem; */
      display: flex;
      flex-wrap: wrap;
-     
-     justify-content: space-around;
+     height: 99%; 
+     justify-content: space-evenly;
+
      
  }
  .block{
-     margin-top: 2rem;
+     margin-top: 3rem;
      font-size: 1.2rem;
-     word-break: break-all;
-     padding: 1rem;
+     word-break: normal;
+     padding: 2rem;
      background-color:white ;
+     border-radius: 2rem;
 
-     width:45rem;
+     width:45rem; 
  }
+ p{
+     display: inline;
+ }
+ #headtag{
+    display: inline;
+     line-height: 1.8;
+     font-weight: 1000;
+     font-size: 1.8rem;
+     padding-bottom: 2rem;
+     
+ }
+ #datacontent{
+    display: inline;
+    line-height: 1.8;
+    font-size: 1.5rem;
+    padding: 1.2rem;
+     
+ } 
+ /* .dataouter{
+     display: inline;
+ } */
+  .dataouter{
+     display: inline;
+     
+ } 
+ /* .email{
+     border: 2px solid bl;
+ } */
+ /* .dataouter{
+     display: inline;
+     border: 1px solid black;
+     margin-left: 2rem;
+ } */

@@ -1,3 +1,4 @@
+
 @import url("https://tonts. goog-capis:com/055family=Poppins:400,700| Open+Sans: 400") ;
 *{
     margin:0;
@@ -65,11 +66,12 @@ a{
 
  .charts{
      
-     display: flex; 
-     margin-left: 10rem;
-      flex-wrap: wrap; 
-     margin-right: 4rem;
-      justify-content: space-between; 
+    margin-left: 6rem;
+    /* margin-right: -2rem; */
+      display: flex;
+      flex-wrap: wrap;
+      height: 99%; 
+      justify-content: space-evenly;
  }
  /* .piechart{
     
@@ -81,11 +83,11 @@ a{
 
      width:45rem;
  }*/
- .chart_div1{
-     /* position:absolute;
+ /* .chart_div1{
+     position:absolute;
      top: 50%;
      left: 50%;
-    transform: translate(-50%,-50%); */
+    transform: translate(-50%,-50%); 
     font-size: 1.2rem;
     word-break: break-all;
     padding: 1rem;
@@ -99,32 +101,33 @@ a{
     
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
- }
- #chart_div2{
+    transform: translate(-50%,-50%); }*/
+ 
+ /* #chart_div2{
     position: absolute;
     
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
- }
- /* #chrt_div3{
-    margin-top: 10rem;
-    width: 40%;
  } */
+
  h2{
      text-align: center;
      font-size: 2.5rem;
      padding: 2rem;
  }
- .chart-box{
+.chart-box{
     position: relative;
-     background-color: white;
-     width: 45%;
-     height: 250px;
-     margin-top: 4rem;
+    margin-top: 2rem;
+     font-size: 1.2rem;
+     word-break: normal;
+     padding: 2rem;
+     background-color:white ;
+     
+
+     width:50rem;
  }  
- .chart2{
+  /* .chart2{
     background-color: white;
     width: 40%;
     height: 50px;
@@ -135,4 +138,17 @@ a{
     width: 40%;
     height: 50px;
     margin: 10px;
-}   
+ */
+ /* #myChart1 #myChart2  #myChart{
+     position: absolute;
+     display: block;
+     width: 460px;
+     height: 230px;
+ } */
+ 
+/* element.style{
+    display: block;
+    box-sizing: border-box;
+    height: 160px;
+    width: 160.8px
+ } */

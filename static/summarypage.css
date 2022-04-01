@@ -1,0 +1,165 @@
+@import url("https://tonts. goog-capis:com/055family=Poppins:400,700| Open+Sans: 400") ;
+*{
+    margin:0;
+    padding:0;
+   
+}
+html{
+    font-size: 62.6%;
+}
+body{
+   
+    
+    font-size: 'Montserrat';
+    height: 94.5vh; 
+
+    /* background: linear-gradient(to left,rgba(224,224,224),rgba(169,169,169,1)); */
+    background-position: bottom ;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    
+}
+p{
+    font-size: 3rem;
+    letter-spacing: 0.25rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+a{
+    text-decoration:none;
+}
+
+li{
+    list-style: none;
+}
+h2{
+    font-size: 2rem;
+}
+
+  
+ /*p{
+    margin-top: 1rem;
+     font-size: 3.5rem;
+    text-transform:uppercase ;
+    text-align: center;
+    position: relative;
+    
+}*/
+
+
+.logo{
+    float: left;
+    position: relative;
+    width: 2rem;
+    background-color: white;
+    box-shadow: 0.1rem 0.2rem 0.8rem black;
+    height: 100%;
+    padding: 2rem; 
+    
+    
+ }
+ .setting1,.home ,.statistic,.candiate ,.account{
+     width: 2.2rem;
+}
+.home{
+    margin-top: 2rem;
+}
+.setting1{
+    margin-top: 2rem;
+}
+.home ,.statistic,.candiate{
+    margin-left: -2.2rem;
+    width:7rem ;
+
+}
+.fa-microsoft{
+    font-size: 2rem;
+    color: black;
+   
+}
+.setting{
+   margin-top: 25rem;
+   width: 2.4rem;
+}
+.account{
+    width: 5.6rem;
+    margin-left: -2.1rem;
+    
+}
+.con{
+       position: fixed;   
+      display: inline-block;  
+      top: 50%;
+     left: calc(50% + 3rem);
+     transform: translate(-50%,-50%); 
+      /* margin: 4rem;    */
+      height: 90%;
+      width: 90%;
+      padding: 2rem ;
+     background: linear-gradient(90deg, rgba(27,101,152,1) 12%, rgba(11,164,204,1) 51%, rgba(18,173,213,1) 100%);
+     border-radius: 2rem;
+     color: white;
+     z-index: -3;
+
+}
+a{
+    color: white;
+    font-size: 1.7rem;
+    z-index: 1000;
+}
+
+
+
+.data{
+    display: flex;
+    flex-wrap: wrap;
+     height: 99%; 
+     justify-content: space-evenly; 
+     z-index: -1;
+}
+.subtittle{
+    position: relative;
+    width: 25%;
+    /* border: 2px solid black; */
+  
+}
+p{
+    font-size: 2.7rem;
+}
+.datacontent{
+    position: relative;
+    width: 60%;
+    /* border: 2px solid black; */
+}
+.innercontent{
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: justify;
+    font-size: 2rem;
+}
+ /* .resumelink{
+    position: absolute ;
+   margin-bottom: 2rem;
+} 
+ .resumeli{
+    width: auto;
+    height: auto;
+    background-color: green;
+    padding: 1rem;
+    border: 1px solid greenyellow;
+}  */
+.resumelink{
+    position: relative;
+    bottom: 1rem;
+    left: 1rem;
+    width: 10rem;
+    height: 2rem;
+    padding: 0.2rem;
+    background-color: blue;
+    border: 1px solid green;
+}

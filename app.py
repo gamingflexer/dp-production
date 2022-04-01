@@ -24,7 +24,7 @@ from werkzeug.utils import secure_filename
 import pyunpack
 import urllib.request
 from keras.preprocessing.sequence import pad_sequences
-from simplet5 import SimpleT5
+#from simplet5 import SimpleT5
 
 from fileconversion import fileconversion1
 from preprocessing import*
@@ -397,10 +397,7 @@ def delete():
     dirzip_list = os.listdir(app.config['ZIPPED'])
 
     for zipfileli in dirzip_list:
-        try:
-            os.remove(z2 + zipfileli)
-        except:
-            print("Cannot delete")
+        os.remove(z2 + zipfileli)
 
     dirrar_list = os.listdir(app.config['EXTRACTED'])
 
@@ -459,6 +456,75 @@ def compare():
 @app.route('/statistic', methods=["POST", "GET"])
 def statistic():
     return render_template('statistic.html')
+
+@app.route('/summary/<int:project_id>', methods=["POST", "GET"])
+def summary(project_id):
+    print(project_id)
+    table_data = []
+
+
+    cur = mysql.connection.cursor()
+
+    compresult = cur.execute("Select can_id,name,education,skills,experience,email from list WHERE can_id= %s ",
+                                     (int(project_id),))
+    if compresult > 0:
+        row = cur.fetchall()
+        print("row ,",row)
+        for dict in row:
+            table_data.append(list(dict.values()))
+        print(table_data)
+
+    return render_template('summarypage.html', cont=table_data)
+
+@app.route('/show/<int:can_id>', methods=["POST", "GET"])
+def show(can_id):
+    print(can_id)
+    resume_path = []
+    cur = mysql.connection.cursor()
+
+    compresult = cur.execute("Select files_path from deepbluecomp_table WHERE sr= %s ",
+                             (int(can_id),))
+    if compresult > 0:
+        row = cur.fetchall()
+        print("row ,", row)
+        for dict in row:
+            resume_path.append(list(dict.values()))
+        print(resume_path[0][0])
+
+    return send_from_directory(UPLOAD_FOLDER,resume_path[0][0])
+
+# @app.route('/linkdein', methods=["POST", "GET"])
+# def show():
+#     emptyB()
+#      emptyBClean()
+#      linked_in_scrap(link)
+#      github_scrape(link)
+#     return 'sucess'
+@app.route('/setting', methods=["POST", "GET"])
+def setting():
+
+    return render_template('setting.html')
+
+@app.route('/rank', methods=["POST", "GET"])
+def rank():
+    if request.method == "POST":
+        education = request.form.getlist('education')
+        othereducation=request.form.get('others')
+        jobdescription=request.form.get('jobtext')
+        print(education, othereducation, jobdescription)
+        cur = mysql.connection.cursor()
+
+        result = cur.execute("Select can_id,cleaned_text from parse  ")
+        if result>0:
+            row = cur.fetchall()
+            print("row ,", row)
+            for data in row:
+                data.get('cleaned_text')
+
+
+
+    return render_template('setting.html')
+
 
 
 if __name__ == "__main__":

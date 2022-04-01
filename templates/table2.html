@@ -81,7 +81,8 @@
                         {% set count.value = count.value + 1 %}
                         <tr class="{{can_id}}">
                             
-                            <td class="check" id="{{count.value-1}}"><input type="checkbox" class="checkit" name="check" value="{{count.value-1}}"></td>
+                            <!-- <td class="check" id="{{count.value-1}}"><input type="checkbox" class="checkit" name="check" value="{{count.value-1}}"></td> -->
+                            <td class="check" id="{{data[0]}}"><input type="checkbox" class="checkit" name="check" value="{{data[0]}}"></td>
 
                         {% for item in data %} 
                         
@@ -90,7 +91,7 @@
                         
                         
                         {% endfor %}
-                        <td><a href="#">resume</a></td>
+                        <td><a href="/summary/{{data[0]}}">resume</a></td>
                         </tr>
                     
                     {% endfor %}

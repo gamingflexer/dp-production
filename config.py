@@ -7,19 +7,19 @@ basepath = os.path.dirname(os.path.realpath(__file__))
 #change accordinly
 summary_model = '/Users/cosmos/Documents/DP-ref/Summary-100'
 bert_dict_path = "/home/aiworkstation2/Music/ser/DeepBlue/flask/models/model_e10.tar"
-index = "/"
+index = "\\"
 driver_path = "/Users/cosmos/chromedriver"
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 #not to change
 spacy_700_path = os.path.join(basepath,"models/DP/new")
-f2 = os.path.join(basepath,"static","zip","files/")
-e2 = os.path.join(basepath,"static","zip","extracted/")
-z2 = os.path.join(basepath,"static","zip/")
+f2 = os.path.join(basepath,"static","files//")
+e2 = os.path.join(basepath,"static","zip","extracted")
+z2 = os.path.join(basepath,"static","zip")
 
 ZIPPED = os.path.join(basepath,"static","zip")
 EXTRACTED = os.path.join(basepath,"static","zip","extracted")
-UPLOAD_FOLDER =  os.path.join(basepath,"static","zip","files")
+UPLOAD_FOLDER =  os.path.join(basepath,"static","files")
 
 filedir = "/Users/cosmos/Desktop/DP/backend/resume_parser_nlp 2.2.4/samples"
 skill_csv  = 'models/skills.csv'

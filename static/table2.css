@@ -10,6 +10,7 @@ html{
 }
 body{
     background-color: white;
+    height: 94.5vh;
 }
 .logo{
     
@@ -66,15 +67,19 @@ a{
      /* background-color: #EBCBCB; */
      background: rgb(27,101,152);
     background: linear-gradient(90deg, rgba(27,101,152,1) 12%, rgba(11,164,204,1) 51%, rgba(18,173,213,1) 100%);
-     margin: 4rem;
-     margin-left: 10rem;
+      /* margin: 4rem; */
+     margin-left: 8rem; 
      /* float: left; */
      display: inline-block;
-     height: 90%;
-     position: fixed;
-     overflow:hidden;
+     height: 100%;
+     position: relative;
+     /* overflow:hidden; */
      border-radius: 1.5rem;
      color: white;
+     margin-bottom: 2rem;
+     margin-top: 2rem;
+     margin-right: 2rem;
+     
         
 }
  h1{
@@ -112,7 +117,7 @@ a{
 }
 table{
    
-    margin-top: 6rem;
+    margin-top: 7rem;
     border-collapse: collapse;
     
     

@@ -7,6 +7,12 @@
 }
 html{
     font-size: 62.6%;
+    display: inline-block;
+}
+body{
+    background: linear-gradient(90deg, rgba(27,101,152,1) 12%, rgba(11,164,204,1) 51%, rgba(18,173,213,1) 100%);
+    height: 94.5vh;
+
 }
 .logo{
     
@@ -56,3 +62,191 @@ a{
      margin-left: -2.1rem;
      
  }
+/* .skills{
+    margin-left: 6rem;
+     margin-right: -2rem; 
+      display: flex;
+      flex-wrap: wrap;
+      
+       height: 99%;  
+       justify-content: space-around; 
+       margin-top: 1rem; 
+} */
+p{
+    display: inline;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 1000;
+}
+/* .skillssubtiitle{
+    margin-left: 1rem;
+    margin-top: 1rem;
+    font-size: 1.8rem;
+    
+
+} */
+.skills{
+
+}
+.pagecontent{
+    background-color: white;
+     /* margin: 6rem; */
+    float: left;
+     display: block;
+     height: 94.6vh;
+     position: relative;
+     width: 92%;
+     border-radius: 1.5rem;
+    /* margin-left: 2rem;
+   margin-right: 2rem;  */
+    left: calc(50% + 4rem);
+    right: 4rem;
+   transform: translate(-50%);  
+      margin-bottom: 2rem;
+     margin-top: 2rem;
+     height: 100%;
+    
+}
+ input[type="checkbox"]   {
+    opacity: 0;
+    position: absolute;
+    font-size: 1.4rem;
+     top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+/* input[type="text"]
+{
+    border: none;
+    position: relative;
+    font-size: 1.4rem; */
+     /* top: 50%;
+    left: 50%; */
+    /* transform: translate(-50%,-50%); */
+/* } */
+
+/* input[type="checkbox"]  ::after{
+    opacity: 1;
+} */
+.check{
+    position: absolute;
+    font-size: 1.4rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+     
+    color: black;
+   
+
+}
+.skillsname{
+   
+    
+    
+}
+.contother{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    text-align: center;
+    background: rgb(13,89,161);
+background: linear-gradient(90deg, rgba(13,89,161,1) 0%, rgba(44,172,185,1) 0%, rgba(9,151,117,1) 71%, rgba(25,180,77,1) 99%);
+}
+.buttons{
+    position: relative;
+    width: 25rem;
+    height: 5rem;
+    border: 1px solid black;
+    margin: 1.5rem;
+    border-radius: 1.5rem;
+    background: rgb(13,89,161);
+    background: linear-gradient(90deg, rgba(13,89,161,1) 0%, rgba(44,172,185,1) 0%, rgba(9,151,117,1) 71%, rgba(25,180,77,1) 99%);
+}
+.others{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 1000;
+    position: relative;
+    width: 25rem;
+    height: 5rem;
+    border: 1px solid black;
+    margin: 1.5rem;
+    border-radius: 1.5rem;
+    background: rgb(13,89,161);
+background: linear-gradient(90deg, rgba(13,89,161,1) 0%, rgba(44,172,185,1) 0%, rgba(9,151,117,1) 71%, rgba(25,180,77,1) 99%);
+}
+::placeholder{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+} 
+.educationsubtiitle , .jobsubtiitle{
+    margin-left: 1rem;
+    /* margin-top: 1rem; */
+    font-size: 1.8rem;
+    
+
+}
+.education{
+    margin-left: 6rem;
+    /* margin-right: -2rem; */
+      display: flex;
+      flex-wrap: wrap;
+      /* height: 99%;  */
+      /* justify-content: space-around; */
+      /* margin-top: 1rem; */
+}
+.jobdes{
+    margin-left: 6rem;
+    display: flex;
+      flex-wrap: wrap;
+      position: relative;
+      justify-content: space-around;
+}
+.contjobdes{
+    /* position: absolute; */
+     border: 2px solid black; 
+     border-radius: 2rem;
+     width: 80%;
+    height: 100%; 
+    padding: 2rem;
+}
+.content::placeholder{
+    position: absolute;
+    color: black;
+    height: 100%;
+    width: 100%;
+    
+}
+.content{
+    /* border: 2px solid black; */
+    width: 100%;
+     height: 20em;  
+    text-align: start;
+    font-weight: 800;
+}
+textarea{
+    border: none;
+}   
+
+.afterchange{
+    position: relative;
+    width: 25rem;
+    height: 5rem;
+    border: 1px solid black;
+    margin: 1.5rem;
+    border-radius: 1.5rem;
+    background: linear-gradient(90deg, rgba(27,101,152,1) 12%, rgba(11,164,204,1) 51%, rgba(18,173,213,1) 100%);
+}
+.subbtn{
+    margin-top: 4rem;
+    margin-left: 90%;
+}
+.sub{
+    width: 8rem;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    background: linear-gradient(90deg, rgba(27,101,152,1) 12%, rgba(11,164,204,1) 51%, rgba(18,173,213,1) 100%);
+}

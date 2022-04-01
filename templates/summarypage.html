@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='summarypage.css') }}"> -->
+    <link rel="stylesheet" href="../static/summarypage.css">
+    
+    <script src="https://kit.fontawesome.com/2360843bb3.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- <script src="static\table2.js"></script> -->
+    <title>Document</title>
+</head>
+<body>
+    <div class="logo">
+        <ul>
+            <li class="logo1"><a href="/home"><i class="fa-brands fa-microsoft"></i></a></li>
+            <li class="logo1"><a href="/upload2"><img src="../static/image\4.png" class="home"></a></li>
+            <li class="logo1"><a href="/table"><img src="../static/image/3.png" class="candiate"></a></li>
+            <li class="logo1"><a href="/statistic"><img src="../static/image/1.png" class="statistic"></a></li>
+            <li class="logo1"><a href="#"><img src="../static/image/2.png" class="setting1"></a></li>
+            <li class="logo1"><a href="#"><img src="../static/image/5.png" class="setting"></a></li>
+            <li class="logo1"><a href="#"><img src="../static/image/acc.png" class="account"></a></li>
+
+
+
+
+        </ul>
+        
+    </div>
+    <div class="con">
+        <div class="data">
+            {% for data in cont %}
+            <div class="subtittle"><p>Candiate Id : </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[0]}}</div></div>
+            <div class="subtittle"><p>Candiate Name : </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[1]}}</div></div>
+            <div class="subtittle"><p>Education : </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[2]}}</div></div>
+            {% if (data[3] != "Null") or (data[3] != None) %}
+                <div class="subtittle"><p>Skills: </p></div>
+                <div class="datacontent"><div class="innercontent">{{data[3]}}</div></div>
+            {% endif %}
+
+            <div class="subtittle"><p>Experience : </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[4]}}</div></div>
+            <div class="subtittle"><p>Email Id : </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[5]}}</div></div>
+            <div class="subtittle"><p>link : </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[5]}}</div></div>
+            <div class="subtittle"><p>Summarry : </p></div>
+            <div class="datacontent"><div class="innercontent">Summary is</div></div>
+            
+            
+
+                <!-- <p id="subtittle">Candiate Id : </p><p>{{data[0]}}</p><br>
+                <p  id="subtittle">Candiate Name : </p><p>{{data[0]}}</p><br>
+                <p  id="subtittle">Education : </p><p>{{data[1]}}</p><br> -->
+                <!-- <p  id="subtittle">Experience : </p><div class="bounding"><p>{{data[4]}}</p><br></div> -->
+                <!-- <div class="nextbounding"> <p  id="subtittle email1">Email Id :  </p><p>{{data[5]}}</p><br>
+                <p  id="subtittle">Links : </p><p>{{data[5]}}</p><br>
+                <p  id="subtittle">Summary : </p><br> 
+               </div> -->
+               <!-- <p  id="subtittle">Experience  : </p><<p>{{data[1]}}</p><br> -->
+
+                <!-- <a href="/show/{{data[0]}}">View Resume</a> -->
+                <!-- <div class="resumelink"> -->
+                    
+                <!-- </div> -->
+            {% endfor %}    
+        </div>
+        <div class="resumelink">
+            <a href="/show/{{cont[0][0]}}" class="resumeli">View Resume </a>
+        </div>
+    </div>
