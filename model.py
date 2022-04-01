@@ -12,7 +12,7 @@ import torch.nn.functional as F
 import torch.nn as nn
 import textract
 from tika import parser
-from transformers import AutoTokenizer, AutoModelForTokenClassification,pipeline
+from transformers import AutoTokenizer, AutoModelForTokenClassification, pipeline
 import torch
 import pyperclip
 import re
@@ -20,14 +20,38 @@ from autocorrect import Speller
 from simplet5 import SimpleT5
 from constants import *
 from config import spacy_700_path
-from preprocessing import remove_hexcode_rhc,summary_clean
+from preprocessing import remove_hexcode_rhc, summary_clean
+from fileconversion import fileconversion1
+from parser2 import resumeparse
+from parser1 import mainML
+from preprocessing import dict_clean, summary_clean
 
-spell = Speller(fast=True,lang='en')
+spell = Speller(fast=True, lang='en')
+
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+def parser(fname):
+    to_delete = ['email', 'phone', 'name', 'total_exp',
+                 'designition', 'skills', 'FileName', 'File Language']  # 2
+    p1 = mainML.get_parsed(fname)
+    p2 = resumeparse.read_file(fname)
+    p3 = spacy_700(fname)
+    print(f'P3-testing ---- {p3}')
+
+    p1.update(p2)
+    for i in to_delete:
+        try:
+            del p1[i]
+        except:
+            continue
+    p2 = dict_clean(p1)
+    return p2
+
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
 
-
-
-def spacy_700(text):
+def spacy_700(path):
+    text = fileconversion1(path)
     o1 = {}
     spacy_700_list = []
     model_spacy_path_all = spacy_700_path
@@ -45,62 +69,78 @@ def spacy_700(text):
     #del model_spacy
     return o1
 
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+
+def summary(text, model_summary):
+    # add pre-processed text (no hex one)
+    text_to_summarize = f"""summarize:{text}"""
+    summary = model_summary.predict(text_to_summarize)
+    summary_1 = summary[0]
+    summary_1 = remove_hexcode_rhc(summary_1)
+    summary_2 = spell(summary_1)
+    summary_2 = summary_clean(summary_2)
+    return summary_2
+
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+
 #spacy - skills
 
-def spacy_skills(text):
-    o2 = {}
-    spacy_skills_list = []
-    model_skills = spacy_skills_path
+# def spacy_skills(text):
+#     o2 = {}
+#     spacy_skills_list = []
+#     model_skills = spacy_skills_path
 
-    model_spacy_s = spacy.load(model_skills)
+#     model_spacy_s = spacy.load(model_skills)
 
-    # predict
-    doc = model_spacy_s(text)
-    for ent in doc.ents:
-        if ent.label_.upper() in tagvalues_spacy:
-            temp = {f'{ent.label_.upper():{4}}': [ent.text]}
-            spacy_skills_list = spacy_skills_list + [temp]
-    for val in spacy_skills_list:
-        o2.update(val)
-    return (o2)
+#     # predict
+#     doc = model_spacy_s(text)
+#     for ent in doc.ents:
+#         if ent.label_.upper() in tagvalues_spacy:
+#             temp = {f'{ent.label_.upper():{4}}': [ent.text]}
+#             spacy_skills_list = spacy_skills_list + [temp]
+#     for val in spacy_skills_list:
+#         o2.update(val)
+#     return (o2)
 
-#spacy - Edu
+# #spacy - Edu
 
-def spacy_edu(text):
-    o3 = {}
-    spacy_edu_list = []
-    model_edu = spacy_edu_path
+# def spacy_edu(text):
+#     o3 = {}
+#     spacy_edu_list = []
+#     model_edu = spacy_edu_path
 
-    model_spacy_e = spacy.load(model_edu)
+#     model_spacy_e = spacy.load(model_edu)
 
-    # predict
-    doc = model_spacy_e(text)
-    for ent in doc.ents:
-        if ent.label_.upper() in tagvalues_spacy:
-            temp = {f'{ent.label_.upper():{4}}': [ent.text]}
-            spacy_edu_list = spacy_edu_list + [temp]
-    for val in spacy_edu_list:
-        o3.update(val)
+#     # predict
+#     doc = model_spacy_e(text)
+#     for ent in doc.ents:
+#         if ent.label_.upper() in tagvalues_spacy:
+#             temp = {f'{ent.label_.upper():{4}}': [ent.text]}
+#             spacy_edu_list = spacy_edu_list + [temp]
+#     for val in spacy_edu_list:
+#         o3.update(val)
     return (o3)
 
 #spacy - Exp
 
-def spacy_exp(text):
-    o4 = {}
-    spacy_exp_list = []
-    model_exp = spacy_exp_path
+# def spacy_exp(text):
+#     o4 = {}
+#     spacy_exp_list = []
+#     model_exp = spacy_exp_path
 
-    model_spacy_exp = spacy.load(model_exp)
+#     model_spacy_exp = spacy.load(model_exp)
 
-    # predict
-    doc = model_spacy_exp(text)
-    for ent in doc.ents:
-        if ent.label_.upper() in tagvalues_spacy:
-            temp = {f'{ent.label_.upper():{4}}': [ent.text]}
-            spacy_exp_list = spacy_exp_list + [temp]
-    for val in spacy_exp_list:
-        o4.update(val)
-    return (o4)
+#     # predict
+#     doc = model_spacy_exp(text)
+#     for ent in doc.ents:
+#         if ent.label_.upper() in tagvalues_spacy:
+#             temp = {f'{ent.label_.upper():{4}}': [ent.text]}
+#             spacy_exp_list = spacy_exp_list + [temp]
+#     for val in spacy_exp_list:
+#         o4.update(val)
+#     return (o4)
 
 
 # Compare
@@ -154,7 +194,7 @@ def ner(text, model, tokenizer):
         final_name_list2 = final_name_list2.replace("]", "")
         final_name_list2 = final_name_list2.replace("[", "")
         final_name_list2 = final_name_list2.replace("'", "")
-        final_name_list2 = final_name_list2.replace("]","")
+        final_name_list2 = final_name_list2.replace("]", "")
 
     return final_name_list
 
@@ -210,13 +250,3 @@ def ner(text, model, tokenizer):
     #             main.remove(val)
 
     # print(main)
-
-def summary(text,model_summary):
-    #add pre-processed text (no hex one)
-    text_to_summarize=f"""summarize:{text}"""
-    summary = model_summary.predict(text_to_summarize)
-    summary_1 = summary[0]
-    summary_1 = remove_hexcode_rhc(summary_1)
-    summary_2 = spell(summary_1)
-    summary_2 = summary_clean(summary_2)
-    return summary_2

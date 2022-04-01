@@ -64,7 +64,7 @@ def fileconversion11(filename, y):
       text = text.replace("\t", " ")
       print(text)
 
-      return (text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
+      return text
 
     elif (extension == "png" or extension == "jpg" or extension=="jpeg"):
       try:
@@ -124,7 +124,7 @@ def fileconversion11(filename, y):
 
       # text = textract.process(filename)
 
-      return (text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
+      return text
 
         #cursor.execute("INSERT INTO datastore( data, link, emailid, phoneno, date, humaname, address, code, data_two) VALUES (%s, %s )",(text1, link, mailid, phone_number, date, human_name, add, pincode, ftext))
     #   cv2.waitKey(0)
@@ -169,7 +169,7 @@ def fileconversion11(filename, y):
                   address = "NAN"
                   pincode = "NAN"
                   ftext = "NAN"
-      return (text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
+      return text
 
     elif (extension == "html"):
        try:
@@ -205,9 +205,7 @@ def fileconversion11(filename, y):
                    pincode = "NAN"
                    ftext = "NAN"
 
-       return (text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
-
-
+       return text
 
     elif (extension == "rtf"):
         try:
@@ -232,7 +230,7 @@ def fileconversion11(filename, y):
                 pincode = "NAN"
                 ftext = "NAN"
 
-        return (text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
+        return text
 
     elif (extension == "odt"):
         try:
@@ -257,7 +255,7 @@ def fileconversion11(filename, y):
                 pincode = "NAN"
                 ftext = "NAN"
 
-        return (text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
+        return text
 
     elif (extension == "doc"):
         try:
@@ -282,7 +280,7 @@ def fileconversion11(filename, y):
                 pincode = "NAN"
                 ftext = "NAN"
 
-        return (text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
+        return text
     elif(extension == "pdf"):
         try:
             raw = parser.from_file(filename)
@@ -310,8 +308,7 @@ def fileconversion11(filename, y):
 
 
 
-    return (text,text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
-
+    return text
 
 
 

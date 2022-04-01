@@ -4,6 +4,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import hashlib
+from preprocessing import linkdien_clean, summary_clean
+
 
 def emptyB():
     for i in range(12):
@@ -20,6 +22,7 @@ def emptyBClean():
         f.write('')
         f.close()
 
+
 def getAbout(soup):
     link_About = soup.find('div', {"class": "display-flex ph5 pv3"})
     about = ''
@@ -29,17 +32,19 @@ def getAbout(soup):
 
     return about
 
+
 def currentWork(soup):
     current_work = soup.find('div', {"class": "text-body-medium break-words"})
     for data in current_work:
         print(data.text)
         return data.text
 
+
 def removeWords():
     bad_words = ['Message', 'logo', 'See credential', 'Expiration Date', 'followers', 'See all', '�', 'comments',
                  '.pdf']
     for i in range(12):
-        with open(f'blocks/{str(i + 1)}bclean.txt', 'r', encoding='utf-8') as oldfile, open(f'blocks/{str(i + 1)}b.txt','w', encoding='utf-8') as newfile:
+        with open(f'blocks/{str(i + 1)}bclean.txt', 'r', encoding='utf-8') as oldfile, open(f'blocks/{str(i + 1)}b.txt', 'w', encoding='utf-8') as newfile:
             for line in oldfile:
                 if not any(bad_word in line for bad_word in bad_words):
                     newfile.write(line)
@@ -103,7 +108,8 @@ def linked_in_scrap(LINK):
     twelvethBox = ''
 
     try:
-        firstBox = driver.find_element_by_xpath('/html/body/div[6]/div[3]/div/div/div[2]/div/div/main/section[2]').text
+        firstBox = driver.find_element_by_xpath(
+            '/html/body/div[6]/div[3]/div/div/div[2]/div/div/main/section[2]').text
         secondBox = driver.find_element_by_xpath(
             '/html/body/div[6]/div[3]/div/div/div[2]/div/div/main/section[3]').text
         thirdBox = driver.find_element_by_xpath(
@@ -126,7 +132,6 @@ def linked_in_scrap(LINK):
             '/html/body/div[6]/div[3]/div/div/div[2]/div/div/main/section[12]').text
         twelvethBox = driver.find_element_by_xpath(
             '/html/body/div[6]/div[3]/div/div/div[2]/div/div/main/section[13]').text
-
 
     except:
         print('error')
@@ -213,11 +218,11 @@ def linked_in_scrap(LINK):
         print(my_dict)
 
         driver.quit()
+        my_dict = linkdien_clean(my_dict)
         return my_dict
 
 
-
-# emptyB()
-# emptyBClean()
-# linked_in_scrap(link)
+emptyB()
+emptyBClean()
+# linked_in_scrap("https://www.linkedin.com/in/tanishq-parkar/")
 # github_scrape(link)

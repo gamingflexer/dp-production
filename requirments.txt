@@ -4,7 +4,7 @@ autocorrect
 numpy
 tika
 selenium
-BeautifulSoup
+BeautifulSoup4
 fitz
 opencv-python
 fpdf
@@ -19,6 +19,7 @@ torch
 pyap
 huggingface_hub==0.2.1
 nameparser
+pyperclip
 spacy==2.2.4
 pytorch_pretrained_bert
 mysql
@@ -27,7 +28,8 @@ mysql.connector
 flask_sqlalchemy
 flask
 date_extractor
-PyMuPDF 
+PyMuPDF
+simplet5
 fitz
 pytest
 coverage
@@ -38,3 +40,6 @@ pyperclip
 fuzzywuzzy
 spacy_langdetect
 phonenumbers
+stemming
+pdfplumber
+docx2txt

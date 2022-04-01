@@ -379,6 +379,32 @@ def extract_entity_sections_grad(text):
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
+linkdien_keys = ['Highlights', 'About', 'Activity', 'Education', 'Experience', 'Licenses & certifications', 'Skills',
+                    'Projects', 'Honors & awards', 'Languages', 'Interests', 'Causes', 'Featured']
+
+def linkdien_clean(dict):
+        for i in linkdien_keys: #str
+            try:
+                k = dict[i]
+                k = re.sub("\n"," ",k)
+                k = re.sub("/n"," ",k)
+                k = summary_clean(k)
+                dict[i] = k
+            except:
+                pass
+        for i in linkdien_keys: #list
+            try:
+                k = dict[i]
+                t = 0
+                for m in k:
+                    m = re.sub("\n"," ",m)
+                    m = re.sub("/n"," ",m)
+                    m = summary_clean(m)
+                    dict[i][t] = m
+                    t = t+1
+            except:
+                pass
+        return dict
 
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
