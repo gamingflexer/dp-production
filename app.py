@@ -356,23 +356,14 @@ def upload():
                         databaseattribute[key] = 'Null'
 
                     oo3 = spacy_700(ftext)
-                    # oo2 = spacy_skills(text1)
-                    # oo3 = spacy_edu(text1)
-                    # oo4 = spacy_exp(text1)
-                    # print(oo1)
                     print(oo3)
-                    # print(oo3)
-                    # print(oo4)
                     #entities1 = predict(MODEL, TOKENIZER, idx2tag, tag2idx, DEVICE, text1)
                     #output_bert = clean_bert(entities1, tags_vals)
                     # print(output_bert)
-                    # print("------BERT--------")
                     # entities1 = predict(MODEL, TOKENIZER, idx2tag, tag2idx, DEVICE, text1)
                     # output_bert = clean_bert(entities1, tags_vals)
-                    # print(output_bert)
                     print("------NAME--------")
-                    # name_extracted = ner(text2,model_bert_ner,tokenizer_bert_ner) #is a list
-                    # print(name_extracted)
+
 
                     # Linkdien
                     # if linkdedln != None:
