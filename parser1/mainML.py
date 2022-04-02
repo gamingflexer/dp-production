@@ -7,15 +7,18 @@ import shutil
 from parser1 import model_extraction
 from parser1 import config_p
 import utils
+from tika import parser
 from parser1.fileconversion1 import fileconversion11
 
 
 class Extract:
     def __init__(self, _file):
         # try:
-        text,text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext = fileconversion11(_file,y=0)
-        self.data = str(text)
-        #self.data = textract.process(_file).decode('utf-8')
+        # text,text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext = fileconversion11(_file,y=0)
+        # text=fileconversion11(_file, y=0)
+        # self.data = str(text)
+        raw = parser.from_file(_file)
+        self.data =  raw['content']
         self.new_data = utils.get_new_data(self.data)
         self.filename = _file.split('/')[-1]
 

@@ -15,7 +15,7 @@ from fuzzywuzzy import fuzz
 import phonenumbers
 from parser1 import config_p
 import utils
-from model import ner
+# from model import ner
 
 nlp = config_p.en_sm
 nlp.add_pipe(LanguageDetector(), name="language_detector", last=True)

@@ -36,6 +36,7 @@ from db import *
 from config import *
 from flask_fun import * 
 from constants import *
+from ranking import cosine_sim,ranking
 
 
 
@@ -331,20 +332,20 @@ def upload():
 
                     print("\n------MODELS--------\n")
                     print('------SPACY--------')
-                    #oo1 = spacy_700(text1)
-                    oo2 = spacy_700(text2)
 
-                    for entity in entities:
-                        if entity in oo2.keys():
-                            values = oo2.get(entity)
-                            if (entity.replace(" ", "_").lower() in databaseattribute.keys()):
-                                databaseattribute.update(
-                                    {entity.replace(" ", "_").lower(): values})
 
-                    # print(databaseattribute)
-                    for key, values in databaseattribute.items():
-                        if (databaseattribute[key] == None):
-                            databaseattribute[key] = 'Null'
+
+                    # for entity in entities:
+                    #     if entity in oo2.keys():
+                    #         values = oo2.get(entity)
+                    #         if (entity.replace(" ", "_").lower() in databaseattribute.keys()):
+                    #             databaseattribute.update(
+                    #                 {entity.replace(" ", "_").lower(): values})
+                    #
+                    # # print(databaseattribute)
+                    # for key, values in databaseattribute.items():
+                    #     if (databaseattribute[key] == None):
+                    #         databaseattribute[key] = 'Null'
 
                     cur.execute("INSERT INTO model(unknown,name,degree,skills,college_name,university,graduation_year,companies_worked_at,designation,years_of_experience,location,address,rewards_achievements,projects) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
                                 (databasevalue(databaseattribute.get('unknown')), databasevalue(databaseattribute.get('name')), databasevalue(databaseattribute.get('degree')), databasevalue(databaseattribute.get('skills')), databasevalue(databaseattribute.get('college_name')), databasevalue(databaseattribute.get('university')), databasevalue(databaseattribute.get('graduation_year')), databasevalue(databaseattribute.get('companies_worked_at')), databasevalue(databaseattribute.get('designation')), databasevalue(databaseattribute.get('years_of_experience')), databasevalue(databaseattribute.get('location')), databasevalue(databaseattribute.get('address')), databasevalue(databaseattribute.get('rewards_achievements')), databasevalue(databaseattribute.get('projects')),))
@@ -363,6 +364,8 @@ def upload():
                     # entities1 = predict(MODEL, TOKENIZER, idx2tag, tag2idx, DEVICE, text1)
                     # output_bert = clean_bert(entities1, tags_vals)
                     print("------NAME--------")
+                    parsedotput=parser("C:\\Users\\Yash\\OneDrive\\Desktop\\resume2\\Afreen Jamadar_resumes.docx")
+                    print(parsedotput)
 
 
                     # Linkdien
@@ -429,6 +432,8 @@ def table():
         row = cur.fetchall()
         for dict in row:
             table_li.append(list(dict.values()))
+    print(parser("C:\\Users\\Yash\\OneDrive\\Desktop\\resume2\\Supriya Resume-1.pdf"))
+
 
     return render_template('table2.html', row=table_li)
 
@@ -519,13 +524,46 @@ def rank():
             row = cur.fetchall()
             print("row ,", row)
             for data in row:
-                data.get('cleaned_text')
+
+                rank = ranking(jobdescription,data.get('cleaned_text'))
+                print(type(rank))
+                print("rank : ",rank)
+                cur.execute("UPDATE list SET ranked =%s WHERE can_id=%s",(rank,data.get('can_id')))
+                # cur.execute(insertrank, (0.0, 1))
+            mysql.connection.commit()
+            # cur.close()
 
 
 
     return render_template('setting.html')
 
+@app.route('/linkedln',methods=["POST","GET"])
+def linkdedln():
+    count=18
+    cur = mysql.connection.cursor()
+    # while(count>=18):
+    row = cur.execute("Select linkedin_link from parse WHERE can_id= %s",(18,))
+    if row>0:
+            linkedlnlink=cur.fetchall()
+            link=linkedlnlink[0].get('linkedin_link')
+            print(link)
+            if(link==''):
+                cur.execute("UPDATE parse SET webscraplinkedln =%s WHERE can_id=%s",("Link Not Found",count))
+            else:
+                 # try:
+                    emptyB()
+                    emptyBClean()
+                    flink=link.replace(',','')
+                    #linked_in_scrap('https://www.linkedin.com/in/kunal-wagh-1ab140217/')
+                    cur.execute("UPDATE parse SET webscraplinkedln =%s WHERE can_id=%s", (linked_in_scrap(flink), count))
+                    print(linked_in_scrap(flink))
+                 # except:
+                 #    cur.execute("UPDATE parse SET webscraplinkedln =%s WHERE can_id=%s", ("Link is not valid", count))
 
+
+        # count = count - 1
+    mysql.connection.commit()
+    return 'sucess'
 
 if __name__ == "__main__":
     app.run(debug=True)

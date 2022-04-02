@@ -70,7 +70,7 @@ def linked_in_scrap(LINK):
     emptyBClean()
 
     # PATH to chrome driver
-    AD_CHROME_PATH = '/Users/cosmos/chromedriver'
+    AD_CHROME_PATH = 'C:\\Users\\Yash\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe'
     ser = Service(AD_CHROME_PATH)
     op = webdriver.ChromeOptions()
     driver = webdriver.Chrome(service=ser, options=op)

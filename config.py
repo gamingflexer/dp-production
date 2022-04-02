@@ -8,7 +8,7 @@ basepath = os.path.dirname(os.path.realpath(__file__))
 summary_model = '/Users/cosmos/Documents/DP-ref/Summary-100'
 bert_dict_path = "/home/aiworkstation2/Music/ser/DeepBlue/flask/models/model_e10.tar"
 index = "\\"
-driver_path = "/Users/cosmos/chromedriver"
+driver_path = "C:\\Users\\Yash\\Downloads\\chromedriver_win32 (1)"
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 #not to change
