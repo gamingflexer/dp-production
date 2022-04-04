@@ -1,3 +1,4 @@
+from flask_ngrok import run_with_ngrok
 from constants import *
 from ast import Return
 from flask import Flask, render_template, request, flash, redirect
@@ -62,9 +63,10 @@ print('\n NER Model & Summary Loaded!\n')
 
 # flask
 app = Flask(__name__)
+#run_with_ngrok(app)
 app.config['SECRET_KEY'] = 'cairocoders-ednalan'
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_HOST'] = 'dpomserver.mysql.database.azure.com'
+app.config['MYSQL_USER'] = 'dpomserver@dpomserver'
 app.config['MYSQL_PASSWORD'] = 'Yashw@123'
 app.config['MYSQL_DB'] = 'deepbluecomp'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
@@ -213,7 +215,6 @@ def upload():
                         destination = f2 + file_name
                         shutil.move(source, destination)
 
-                    oo2 = spacy_700(text2)
 
                     for entity in entities:
                         if entity in oo2.keys():
@@ -321,6 +322,7 @@ def upload():
                     cur.execute(
                         "INSERT INTO deepbluecomp_table(files_path,binaryfiles_path) VALUES (%s, %s)", (filerename, binartfile))
                     print(path)
+                    mysql.connection.commit()
 
                     text2, text1, link, mailid, phone_number, date, human_name, add, pincode, ftext = fileconversion1(
                         path, num)
@@ -347,24 +349,23 @@ def upload():
                     #     if (databaseattribute[key] == None):
                     #         databaseattribute[key] = 'Null'
 
-                    cur.execute("INSERT INTO model(unknown,name,degree,skills,college_name,university,graduation_year,companies_worked_at,designation,years_of_experience,location,address,rewards_achievements,projects) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
-                                (databasevalue(databaseattribute.get('unknown')), databasevalue(databaseattribute.get('name')), databasevalue(databaseattribute.get('degree')), databasevalue(databaseattribute.get('skills')), databasevalue(databaseattribute.get('college_name')), databasevalue(databaseattribute.get('university')), databasevalue(databaseattribute.get('graduation_year')), databasevalue(databaseattribute.get('companies_worked_at')), databasevalue(databaseattribute.get('designation')), databasevalue(databaseattribute.get('years_of_experience')), databasevalue(databaseattribute.get('location')), databasevalue(databaseattribute.get('address')), databasevalue(databaseattribute.get('rewards_achievements')), databasevalue(databaseattribute.get('projects')),))
+                    # cur.execute("INSERT INTO model(unknown,name,degree,skills,college_name,university,graduation_year,companies_worked_at,designation,years_of_experience,location,address,rewards_achievements,projects) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                    #             (databasevalue(databaseattribute.get('unknown')), databasevalue(databaseattribute.get('name')), databasevalue(databaseattribute.get('degree')), databasevalue(databaseattribute.get('skills')), databasevalue(databaseattribute.get('college_name')), databasevalue(databaseattribute.get('university')), databasevalue(databaseattribute.get('graduation_year')), databasevalue(databaseattribute.get('companies_worked_at')), databasevalue(databaseattribute.get('designation')), databasevalue(databaseattribute.get('years_of_experience')), databasevalue(databaseattribute.get('location')), databasevalue(databaseattribute.get('address')), databasevalue(databaseattribute.get('rewards_achievements')), databasevalue(databaseattribute.get('projects')),))
+                    #
+                    # cur.execute(
+                    #     "INSERT INTO list(email) VALUES (%s)", (mailid,))
+                    #
+                    # for key, values in databaseattribute.items():
+                    #     databaseattribute[key] = 'Null'
 
-                    cur.execute(
-                        "INSERT INTO list(email) VALUES (%s)", (mailid,))
 
-                    for key, values in databaseattribute.items():
-                        databaseattribute[key] = 'Null'
-
-                    oo3 = spacy_700(ftext)
-                    print(oo3)
-                    #entities1 = predict(MODEL, TOKENIZER, idx2tag, tag2idx, DEVICE, text1)
-                    #output_bert = clean_bert(entities1, tags_vals)
                     # print(output_bert)
                     # entities1 = predict(MODEL, TOKENIZER, idx2tag, tag2idx, DEVICE, text1)
                     # output_bert = clean_bert(entities1, tags_vals)
                     print("------NAME--------")
-                    parsedotput=parser("C:\\Users\\Yash\\OneDrive\\Desktop\\resume2\\Afreen Jamadar_resumes.docx")
+                    path1 = path.replace("\\","\\\\")
+                    print(path1)
+                    parsedotput=parser(path1)
                     print(parsedotput)
 
 
@@ -405,7 +406,7 @@ def delete():
     dirrar_list = os.listdir(app.config['EXTRACTED'])
 
     for rarfileli in dirrar_list:
-        os.remove(f2 + rarfileli)
+        os.remove(e2 + rarfileli)
 
     folder = f2
     for filename in os.listdir(folder):
@@ -432,7 +433,7 @@ def table():
         row = cur.fetchall()
         for dict in row:
             table_li.append(list(dict.values()))
-    print(parser("C:\\Users\\Yash\\OneDrive\\Desktop\\resume2\\Supriya Resume-1.pdf"))
+    # print(parser("C:\\Users\\Yash\\OneDrive\\Desktop\\resume2\\Supriya Resume-1.pdf"))
 
 
     return render_template('table2.html', row=table_li)

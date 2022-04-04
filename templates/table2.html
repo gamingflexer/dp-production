@@ -60,7 +60,7 @@
                     <div class="tabular" >
                     <tr>   
                         
-                        <th > </th>    
+                        <th ><a onclick="uncheck()">Deselect</a> </th>    
                         <th>Candiate Id</th>
                         <th>Name</th>
                         <th>Education </th>
@@ -106,18 +106,17 @@
     </div>
     
     </div>
-    <!-- <script>
-        function printDiv() {
-            var divContents = document.getElementById("table_data").innerHTML;
-            var a = window.open('', '', 'height=500, width=500');
-            a.document.write('<html>');
-            a.document.write('<body > <h1>Div contents are <br>');
-            // a.document.write(\ )    
-            a.document.write(divContents.outerHTML);
-            a.document.write('</body></html>');
-            a.document.close();
-            a.print();
+    <script>
+        function uncheck(){
+            var uncheck=document.getElementsByTagName('input');
+        for(var i=0;i<uncheck.length;i++)
+        {
+         if(uncheck[i].type=='checkbox')
+            {
+                uncheck[i].checked=false;
+            }
         }
-    </script> -->
+        }
+    </script>
 </body>
 </html>

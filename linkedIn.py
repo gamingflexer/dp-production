@@ -201,7 +201,7 @@ def linked_in_scrap(LINK):
         removeWords()
 
         elements = ['Highlights', 'About', 'Activity', 'Education', 'Experience', 'Licenses & certifications', 'Skills',
-                    'Projects', 'Honors & awards', 'Languages', 'Interests', 'Causes', 'Featured']
+                    'Projects', 'Honors & awards', 'Languages', 'Interests', 'Causes', 'Featured','Volunteering']
 
         my_dict = {}
         for i in range(14):
@@ -210,7 +210,7 @@ def linked_in_scrap(LINK):
                 for j in range(13):
                     if elements[j] in first_line:
                         remaining_lines = file.readlines()
-                        my_dict[elements[i]] = remaining_lines
+                        my_dict[elements[j]] = remaining_lines
                         break
                     else:
                         j += 1

@@ -33,18 +33,18 @@ spell = Speller(fast=True, lang='en')
 def parser(fname):
     to_delete = ['email', 'phone', 'name', 'total_exp',
                  'designition', 'skills', 'FileName', 'File Language']  # 2
-    p1 = mainML.get_parsed(fname)
+    #p1 = mainML.get_parsed(fname)
     p2 = resumeparse.read_file(fname)
     p3 = spacy_700(fname)
     print(f'P3-testing ---- {p3}')
 
-    p1.update(p2)
-    for i in to_delete:
-        try:
-            del p1[i]
-        except:
-            continue
-    p2 = dict_clean(p1)
+    # p1.update(p2)
+    # for i in to_delete:
+    #     try:
+    #         del p1[i]
+    #     except:
+    #         continue
+    # p2 = dict_clean(p1)
     return p2
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #

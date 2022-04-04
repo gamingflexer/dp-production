@@ -1,2 +1,0 @@
-About
-A software engineer who loves javascript and always look for ways to contribute to open source softwares.
