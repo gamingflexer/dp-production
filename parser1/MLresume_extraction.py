@@ -15,7 +15,7 @@ from fuzzywuzzy import fuzz
 import phonenumbers
 from parser1 import config_p
 import utils
-# from model import ner
+from model import ner
 
 nlp = config_p.en_sm
 nlp.add_pipe(LanguageDetector(), name="language_detector", last=True)
@@ -503,9 +503,9 @@ def get_name(entities, text):
         name = entities['Name']
 
         for n in name:
-            if set(n.lower().split()) & set(comm.DESIGNATION):
+            if set(n.lower().split()) & set(com.DESIGNATION):
                 continue
-            elif set(n.lower().split()) & set(comm.RESUME_SECTIONS):
+            elif set(n.lower().split()) & set(com.RESUME_SECTIONS):
                 continue
             else:
                 return n
@@ -584,10 +584,10 @@ def get_personal(custom_entities, data):
     name = ""
     emailid = get_email(data)
     name = get_name(custom_entities, data)
-    if (name==None or name=='None'):
+    if (name==None or name=="None"):
         name = ner(data)
     else:
-        name='None'
+        name='None-'
     phoneno = get_phonenumber(data)
     gender = get_gender(data)
     try:
@@ -671,7 +671,7 @@ def get_location(text, ents):
             continue
         for word in line.split():
             word = re.sub(r'[^\w\s]', ' ', word)
-            if word.lower().strip() in comm.LOCATION:
+            if word.lower().strip() in com.LOCATION:
 
                 words = [w for w in line.split() if w in nations]
                 if len(words) != 0:
