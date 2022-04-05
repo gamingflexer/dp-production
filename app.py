@@ -38,7 +38,7 @@ from config import *
 from flask_fun import * 
 from constants import *
 from ranking import cosine_sim,ranking
-
+from linkedlndict import *
 
 
 
@@ -67,6 +67,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'cairocoders-ednalan'
 app.config['MYSQL_HOST'] = 'dpomserver.mysql.database.azure.com'
 app.config['MYSQL_USER'] = 'dpomserver@dpomserver'
+# app.config['MYSQL_HOST'] = 'Localhost'
+# app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Yashw@123'
 app.config['MYSQL_DB'] = 'deepbluecomp'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
@@ -467,6 +469,7 @@ def statistic():
 def summary(project_id):
     print(project_id)
     table_data = []
+    linked_list = []
 
 
     cur = mysql.connection.cursor()
@@ -480,7 +483,16 @@ def summary(project_id):
             table_data.append(list(dict.values()))
         print(table_data)
 
-    return render_template('summarypage.html', cont=table_data)
+    linkedln_details_no = cur.execute("Select Education_l,Expirence_l,Licenses_Certificates_l,Skills_l,Projects_l,Honors_awards_l,Languages_l,About_l,Activity_l,Interest,Causes_l,Featured_l,Volunteering from linkdien WHERE can_id= %s ",
+                             (int(project_id),))
+    if linkedln_details_no > 0:
+        linkedln_details = cur.fetchall()
+        print("row ,", linkedln_details)
+        for dict in linkedln_details:
+            linked_list.append(list(dict.values()))
+        print(linked_list)
+
+    return render_template('summarypage.html', cont=table_data , lindata=linked_list)
 
 @app.route('/show/<int:can_id>', methods=["POST", "GET"])
 def show(can_id):
@@ -542,24 +554,31 @@ def rank():
 def linkdedln():
     count=18
     cur = mysql.connection.cursor()
-    # while(count>=18):
-    row = cur.execute("Select linkedin_link from parse WHERE can_id= %s",(18,))
-    if row>0:
-            linkedlnlink=cur.fetchall()
-            link=linkedlnlink[0].get('linkedin_link')
-            print(link)
-            if(link==''):
-                cur.execute("UPDATE parse SET webscraplinkedln =%s WHERE can_id=%s",("Link Not Found",count))
-            else:
-                 # try:
+    # # while(count>=18):
+    # row = cur.execute("Select linkedin_link from parse WHERE can_id= %s",(18,))
+    # if row>0:
+    #         linkedlnlink=cur.fetchall()
+    #         link=linkedlnlink[0].get('linkedin_link')
+    #         print(link)
+    link=''
+    link=link.replace(',','')
+    if(link==''):
+                cur.execute("INSERT INTO linkdien(Education_l) VALUES (%s)",("Link Not Found"))
+                mysql.connection.commit()
+    else:
+                   try:
                     emptyB()
                     emptyBClean()
                     flink=link.replace(',','')
                     #linked_in_scrap('https://www.linkedin.com/in/kunal-wagh-1ab140217/')
-                    cur.execute("UPDATE parse SET webscraplinkedln =%s WHERE can_id=%s", (linked_in_scrap(flink), count))
-                    print(linked_in_scrap(flink))
-                 # except:
-                 #    cur.execute("UPDATE parse SET webscraplinkedln =%s WHERE can_id=%s", ("Link is not valid", count))
+                    # cur.execute("UPDATE parse SET webscraplinkedln =%s WHERE can_id=%s", (linked_in_scrap(flink), count))
+
+                    linked_data=linked_in_scrap(flink)
+                    print("data : ",linked_data)
+                    cur.execute("INSERT INTO linkdien(Education_l ,Expirence_l ,Licenses_Certificates_l ,Skills_l,Projects_l,Honors_awards_l,Languages_l,About_l,Activity_l,Interest,Causes_l,Featured_l,Volunteering) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (linkedlndb(linked_data.get('Education')), linkedlndb(linked_data.get('Experience')), linkedlndb(linked_data.get('Licenses & certifications')),linkedlndb(linked_data.get('Skills')),linkedlndb(linked_data.get('Projects')),linkedlndb(linked_data.get('Honors & awards')),linkedlndb(linked_data.get('Languages')),linkedlndb(linked_data.get('About')),linkedlndb(linked_data.get('Activity')),linkedlndb(linked_data.get('Interests')),linkedlndb(linked_data.get('Causes')),linkedlndb(linked_data.get('Featured')),linkedlndb(linked_data.get('Volunteering'))))
+                    mysql.connection.commit()
+                   except:
+                       cur.execute("INSERT INTO linkdien(Education_l) VALUES (%s)", ("Technical issue"))
 
 
         # count = count - 1

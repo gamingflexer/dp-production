@@ -213,6 +213,7 @@ def linked_in_scrap(LINK):
                         my_dict[elements[j]] = remaining_lines
                         break
                     else:
+                        my_dict[elements[i]] = "null"
                         j += 1
 
         print(my_dict)
