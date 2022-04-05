@@ -70,11 +70,16 @@ def linked_in_scrap(LINK):
     emptyBClean()
 
     # PATH to chrome driver
-    AD_CHROME_PATH = 'C:\\Users\\Yash\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe'
-    ser = Service(AD_CHROME_PATH)
-    op = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ser, options=op)
-
+    #AD_CHROME_PATH = 'C:\\Users\\Yash\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe'
+    # ser = Service(AD_CHROME_PATH)
+    # op = webdriver.ChromeOptions()
+    # driver = webdriver.Chrome(service=ser, options=op)
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome('chromedriver',chrome_options=chrome_options)
+    
     # USERNAME AND PASSWORD
     USERNAME = 'omsurve570@gmail.com'
     PASSWORD = 'lucario123'
@@ -213,7 +218,6 @@ def linked_in_scrap(LINK):
                         my_dict[elements[j]] = remaining_lines
                         break
                     else:
-                        my_dict[elements[i]] = "null"
                         j += 1
 
         print(my_dict)

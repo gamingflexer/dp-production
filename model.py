@@ -31,9 +31,10 @@ spell = Speller(fast=True, lang='en')
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
 def parser(fname):
+    p4 =[]
     to_delete = ['email', 'phone', 'name', 'total_exp',
-                 'designition', 'skills', 'FileName', 'File Language']  # 2
-    #p1 = mainML.get_parsed(fname)
+                 'designition','FileName', 'File Language']  # 2
+    p1 = mainML.get_parsed(fname)
     p2 = resumeparse.read_file(fname)
     p3 = spacy_700(fname)
     print(f'P3-testing ---- {p3}')
@@ -44,6 +45,16 @@ def parser(fname):
             del p1[i]
         except:
             continue
+    #skills merge
+    p4 = p1['Skills'] + p1['skills']
+    p1.pop('Skills')
+    p1.pop('skills')
+    
+    #remove bad words in skills
+    for bad in BAD_words:
+        p4.remove(bad)
+        
+    p1.update({"Skills":p4})
     p2 = dict_clean(p1)
     return p2
 
@@ -81,6 +92,13 @@ def summary(text, model_summary):
     summary_2 = spell(summary_1)
     summary_2 = summary_clean(summary_2)
     return summary_2
+
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+
+def summary_extractive(text):
+    outputs = learn.blurr_generate(text, early_stopping=False, num_return_sequences=1)
+    return outputs
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
