@@ -9,6 +9,8 @@ o3={}
 o4={}
 docker = 0
 
+BAD_words = ["system"," ","  "]
+
 #FLASK
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg',
                          'jpeg', 'docx', 'doc', 'rtf', 'odt', 'html', 'txt', 'zip'])
@@ -17,6 +19,7 @@ databaseattribute = {'unknown': None, 'name': None, 'degree': None, 'skills': No
                      'university': None, 'graduation_year': None, 'companies_worked_at': None, 'designation': None,
                      'years_of_experience': None, 'location': None,
                      'address': None, 'rewards_achievements': None, 'projects': None}
+
 entities = ['COLLEGE NAME', 'COMPANIES WORKED AT', 'DEGREE', 'DESIGNATION', 'EMAIL ADDRESS', 'SKILLS',
             'YEARS OF EXPERIENCE', 'LOCATION', 'NAME']
 
@@ -33,7 +36,7 @@ tagvalues_spacy = ['COLLEGE NAME', 'COMPANIES WORKED AT', 'DEGREE', 'DESIGNATION
 
 words_stop = ["page 1 of 1","Resume", "page 1 of 2","page 1 of 3", "page 1 of 4",
                 "page 2 of 2","page 3 of 3","page 4 of 4","page 2 of 3",
-                "page 2 of 4","page 3 of 4","resume"]
+                "page 2 of 4","page 3 of 4","resume","CURRICULUM VITAE",""]
 
 NAME_PATTERN = [{'POS': 'PROPN'}, {'POS': 'PROPN'}]
 

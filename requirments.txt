@@ -23,6 +23,9 @@ pyperclip
 spacy==2.2.4
 pytorch_pretrained_bert
 mysql
+ohmeow-blurr
+bert-score
+fastai
 flask_mysqldb
 mysql.connector
 flask_sqlalchemy

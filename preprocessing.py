@@ -332,19 +332,6 @@ def get_links(links):
     return (linkdedln,github,others)
 
 
-def summary_clean(text):
-    def remwithre(text):
-        there=re.compile(re.escape('.')+'.*')
-        return there.sub('', text)
-
-    l = []
-    m = text.split(" ")
-    for i in m:
-        k = remwithre(i)
-        l.append(k)
-
-    new_text = ' '.join(l)
-    return new_text
 
 
 #extras
@@ -378,6 +365,26 @@ def extract_entity_sections_grad(text):
 
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+def summary_clean(text):
+    
+    def remwithre(text):
+        there=re.compile(re.escape('.')+'.*')
+        return there.sub('', text)
+
+    l = []
+    m = text.split(" ")
+    for i in m:
+        if "github" in i:
+            print("found")
+            k = i
+        else:
+            k = remwithre(i)
+        l.append(k)
+
+    new_text = ' '.join(l)
+    return new_text
+
 
 linkdien_keys = ['Highlights', 'About', 'Activity', 'Education', 'Experience', 'Licenses & certifications', 'Skills',
                     'Projects', 'Honors & awards', 'Languages', 'Interests', 'Causes', 'Featured']
