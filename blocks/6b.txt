@@ -1,0 +1,27 @@
+Experience
+Junior Software Developer
+TeachEdison · Internship
+Jan 2022 - Present · 4 mos
+India
+Flask Developer 
+Alegria - The Festival of Joy · Internship
+Nov 2021 - Present · 6 mos
+Python Mentor
+Tekie · Internship
+Dec 2021 - Feb 2022 · 3 mos
+1) Mentored Children of ages 10 to 15 to learn Django and Python.
+2) Mentored Children to learn Web Programming using HTML, CSS and JS.
+1) Mentored Children of ages 10 to 15 to learn Django and Python. 2) Mentored Children to learn Web Programming using HTML, CSS and JS.
+Intern
+The Sparks Foundation · Internship
+Nov 2021 - Dec 2021 · 2 mos
+1) Worked on creating Static Banking System and working with Querying using Django Framework.
+2) Hosted the website on Heroku.
+1) Worked on creating Static Banking System and working with Querying using Django Framework. 2) Hosted the website on Heroku.
+Sparks_Intership_Certificate.png
+Django Developer
+Cureya · Internship
+Oct 2021 - Dec 2021 · 3 mos
+1) Worked on Registration and Login using Firebase and Integrated in Django.
+2) Built API endpoints for Login, Registration, Chatbot queries and hosted them.
+3) Learned React-Native for basic integration with DRF and App.

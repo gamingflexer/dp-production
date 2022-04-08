@@ -1,0 +1,9 @@
+Featured
+Link
+GitHub - RevTpark/First_DRF_React_App
+GitHub
+My first try at integrating DjangoREST Framework Backend with React.js Frontend. Read more about the project on my Github account.
+GitHub - RevTpark/Kivy_Mobile_App
+Word translator mobile app using Kivy framework in Python. Read more about the project on my Github.
+GitHub - RevTpark/My_Django_blog.
+A Blog website developed with Django framework backend and HTML/CSS/BootStrap frontend. Read more about the project on my Github account.

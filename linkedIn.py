@@ -70,17 +70,10 @@ def linked_in_scrap(LINK):
     emptyBClean()
 
     # PATH to chrome driver
-    # ser = Service(AD_CHROME_PATH)
-    # op = webdriver.ChromeOptions()
-    # driver = webdriver.Chrome(service=ser, options=op)
-    # chrome_options = webdriver.ChromeOptions()
-    # chrome_options.add_argument('--headless')
-    # chrome_options.add_argument('--no-sandbox')
-    # chrome_options.add_argument('--disable-dev-shm-usage')
-    bl = "/usr/bin/google-chrome"
+    bl = "/Users/cosmos/chromedriver"
     option = webdriver.ChromeOptions()
     option.bl = bl
-    driver = webdriver.Chrome(executable_path=r'/usr/bin/chromedriver', options=option)
+    driver = webdriver.Chrome(executable_path=r'/Users/cosmos/chromedriver', options=option)
     #driver = webdriver.Chrome('chromedriver',chrome_options=op)
     
     # USERNAME AND PASSWORD
@@ -230,7 +223,7 @@ def linked_in_scrap(LINK):
         return my_dict
 
 
-# emptyB()
-# emptyBClean()
-# print(linked_in_scrap("https://www.linkedin.com/in/tanishq-parkar/"))
+emptyB()
+emptyBClean()
+print(linked_in_scrap("https://www.linkedin.com/in/tanishq-parkar/"))
 # github_scrape(link)

@@ -60,7 +60,7 @@ print('\n NER Model & Summary Loaded!\n')
 
 # flask
 app = Flask(__name__)
-run_with_ngrok(app)
+# run_with_ngrok(app)
 # app.config['ENV'] = 'development'
 # app.config['DEBUG'] = True
 # app.config['TESTING'] = True
@@ -662,4 +662,4 @@ def linkdedln():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

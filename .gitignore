@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 testXX.ipynb
+models/outputs-100-out-lenght
 
 # C extensions
 *.so
