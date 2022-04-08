@@ -6,17 +6,17 @@ import json
 import shutil
 from parser1 import model_extraction
 from parser1 import config_p
-import utils
+from parser1 import utils
 from tika import parser
 from parser1.fileconversion1 import fileconversion11
-
+from model import ner
 
 class Extract:
     def __init__(self, _file):
         # try:
         # text,text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext = fileconversion11(_file,y=0)
         text=fileconversion11(_file, y=0)
-        print(text)
+        print(f"starting model loading - text extracted")
         #text= text.decode()
         self.data = str(text)
         #raw = parser.from_file(_file)

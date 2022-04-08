@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Upload resume here</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='upload2.css') }}">
+  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
   <script src="https://kit.fontawesome.com/2360843bb3.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 </head>
@@ -39,7 +41,7 @@
         <li class="logo1"><a href="/upload2"><img src="static\image\4.png" class="home"></a></li>
         <li class="logo1"><a href="/table"><img src="static\image\3.png" class="candiate"></a></li>
         <li class="logo1"><a href="/statistic"><img src="static\image\1.png" class="statistic"></a></li>
-        <li class="logo1"><a href="#"><img src="static\image\2.png" class="setting1"></a></li>
+        <li class="logo1"><a href="/setting"><img src="static\image\2.png" class="setting1"></a></li>
         <li class="logo1"><a href="#"><img src="static\image\5.png" class="setting"></a></li>
         <li class="logo1"><a href="#"><img src="static\image\acc.png" class="account"></a></li>
 
@@ -49,7 +51,7 @@
   <div id="sub_upload" class="wrapper">
     <!-- <header>File Uploader</header> -->
     <form action="/upload"  method="post" enctype="multipart/form-data"  >
-      <input class="projectname" value="Project Name" name="projectname" >
+      <input class="projectname" value="Web Developer - Mastek" name="projectname" >
       <div  class="sub_wrapper">
         <input class="file-input" type="file" name="files[]" id="fileInput" class="form-control" multiple aria-hidden="false"required >
         <br>

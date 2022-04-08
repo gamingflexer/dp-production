@@ -6,11 +6,11 @@ from selenium.webdriver.chrome.options import Options
 
 
 def github_scrape(userURL):
-    PATH = '/Users/cosmos/chromedriver'
-    driver = webdriver.Chrome(PATH)
     chrome_options = webdriver.ChromeOptions()
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome('chromedriver',chrome_options=chrome_options)
 
     prefs = {"profile.default_content_setting_values.notifications": 2}
     chrome_options.add_experimental_option("prefs", prefs)

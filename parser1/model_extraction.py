@@ -4,7 +4,7 @@ import json
 from parser1.mainML import MLresume_extraction as RE
 import string
 from parser1 import config_p
-import utils
+from parser1 import utils
 
 
 def get_custom_entities_eduexp(text, type):

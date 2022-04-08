@@ -12,6 +12,7 @@ body{
   justify-content: center;
   min-height: 100vh;
   background: #6990F2;
+  font-family: 'Poppins', sans-serif;
 }
 
 ::selection{

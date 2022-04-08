@@ -36,13 +36,16 @@ def fileconversion11(filename, y):
       except:
           try:
              text = textract.process(filename)
+             text = text.decode('utf8').encode('ascii', errors='ignore')
+             text = str(text)
              text = text.replace("\n", " ")
              text = text.replace("\t", " ")
              text = spell(text)
           except:
               try:
                   text = textract.process(filename)
-                  text = text.decode('utf-8')
+                  text = text.decode('utf8').encode('ascii', errors='ignore')
+                  text = str(text)
                   text = text.replace("\n", " ")
                   text = text.replace("\t", " ")
                   text = spell(text)
@@ -100,13 +103,16 @@ def fileconversion11(filename, y):
       except:
           try:
               text = textract.process(filename)
+              text = text.decode('utf8').encode('ascii', errors='ignore')
+              text = str(text)
               text = text.replace("\n", " ")
               text = text.replace("\t", " ")
               text = spell(text)
           except:
               try:
                   text = textract.process(filename)
-                  text = text.decode('utf-8')
+                  text = text.decode('utf8').encode('ascii', errors='ignore')
+                  text = str(text)
                   text = text.replace("\n", " ")
                   text = text.replace("\t", " ")
                   text = spell(text)
@@ -148,13 +154,16 @@ def fileconversion11(filename, y):
       except:
           try:
               text = textract.process(filename)
+              text = text.decode('utf8').encode('ascii', errors='ignore')
+              text = str(text)
               text = text.replace("\n", " ")
               text = text.replace("\t", " ")
               text = spell(text)
           except:
               try:
                   text = textract.process(filename)
-                  text = text.decode('utf-8')
+                  text = text.decode('utf8').encode('ascii', errors='ignore')
+                  text = str(text)
                   text = text.replace("\n", " ")
                   text = text.replace("\t", " ")
                   text = spell(text)
@@ -183,13 +192,16 @@ def fileconversion11(filename, y):
        except:
            try:
                text = textract.process(filename)
+               text = text.decode('utf8').encode('ascii', errors='ignore')
+               text = str(text)
                text = text.replace("\n", " ")
                text = text.replace("\t", " ")
                text = spell(text)
            except:
                try:
                    text = textract.process(filename)
-                   text = text.decode('utf-8')
+                   text = text.decode('utf8').encode('ascii', errors='ignore')
+                   text = str(text)
                    text = text.replace("\n", " ")
                    text = text.replace("\t", " ")
                    text = spell(text)
@@ -216,7 +228,6 @@ def fileconversion11(filename, y):
             try:
                 raw = parser.from_file(filename)
                 text = raw['content']
-                text = text.decode('utf-8')
                 text = spell(text)
             except:
                 text = "Text Not Extracted"
@@ -241,7 +252,6 @@ def fileconversion11(filename, y):
             try:
                 raw = parser.from_file(filename)
                 text = raw['content']
-                text = text.decode('utf-8')
                 text = spell(text)
             except:
                 text = "Text Not Extracted"
@@ -266,7 +276,6 @@ def fileconversion11(filename, y):
             try:
                 raw = parser.from_file(filename)
                 text = raw['content']
-                text = text.decode('utf-8')
                 text = spell(text)
             except:
                 text = "Text Not Extracted"
@@ -291,7 +300,6 @@ def fileconversion11(filename, y):
             try:
                 raw = parser.from_file(filename)
                 text = raw['content']
-                text=text.decode('utf-8')
                 text = spell(text)
             except:
                 text = "Text Not Extracted"

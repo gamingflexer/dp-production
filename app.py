@@ -25,9 +25,9 @@ from werkzeug.utils import secure_filename
 import pyunpack
 import urllib.request
 from keras.preprocessing.sequence import pad_sequences
-#from simplet5 import SimpleT5
-
-from fileconversion import fileconversion1
+from simplet5 import SimpleT5
+from modeldb import*
+from fileconversion import fileconversion0000
 from preprocessing import*
 from preprocessing import dict_clean
 from linkedIn import linked_in_scrap
@@ -39,23 +39,20 @@ from flask_fun import *
 from constants import *
 from ranking import cosine_sim,ranking
 from linkedlndict import *
+from model import parser
 
 
 
 # BERT
 
-#STATE_DICT = torch.load(bert_dict_path, map_location=DEVICE)
-#TOKENIZER = BertTokenizerFast.from_pretrained(MODEL_PATH, lowercase=True)
-#TOKENIZER = Tokenizer(num_words=20000)  # SIMPLE
-# MODEL = BertForTokenClassification.from_pretrained(
-#    MODEL_PATH, state_dict=STATE_DICT['model_state_dict'], num_labels=12)
-# model = MODEL
-# MODEL.to(DEVICE);
 print('\nModel Loaded!\n')
 
-# model_summary = SimpleT5()
-# model_summary.from_pretrained(model_type="t5", model_name="t5-large")
-# model_summary.load_model(summary_model, use_gpu=False)
+model_summary = SimpleT5()
+model_summary.from_pretrained(model_type="t5", model_name="t5-large")
+model_summary.load_model(summary_model, use_gpu=False)
+
+# Summary_run()
+# learn.load(summary_extractive)
 
 # tokenizer_bert_ner = AutoTokenizer.from_pretrained("dslim/bert-base-NER")
 # model_bert_ner = AutoModelForTokenClassification.from_pretrained("dslim/bert-base-NER")
@@ -63,7 +60,10 @@ print('\n NER Model & Summary Loaded!\n')
 
 # flask
 app = Flask(__name__)
-#run_with_ngrok(app)
+run_with_ngrok(app)
+# app.config['ENV'] = 'development'
+# app.config['DEBUG'] = True
+# app.config['TESTING'] = True
 app.config['SECRET_KEY'] = 'cairocoders-ednalan'
 app.config['MYSQL_HOST'] = 'dpomserver.mysql.database.azure.com'
 app.config['MYSQL_USER'] = 'dpomserver@dpomserver'
@@ -202,42 +202,59 @@ def upload():
                         # moving on to final folder
                         cur.execute("INSERT INTO deepbluecomp_table(files_path,binaryfiles_path) VALUES (%s, %s)",
                                     (filerename, binartfile))
-                        print("------")
-                        text, text1, link, mailid, phone_number, date, human_name, add, pincode, ftext = fileconversion1(
-                            path, num)
+                        
+                        print("------zip")
+                        text1, link, mailid, ftext = fileconversion0000(
+                                path, num)
                         linkdedln, github, others = get_links(link)
-
+    
                         cur.execute(
-                            "INSERT INTO parse( extracted_text, cleaned_text,state, emails, linkedin_link, github_link,extra_link,phonenumber) VALUES (%s, %s, %s, %s, %s, %s, %s, %s )",
-                            (text1, ftext, pincode, mailid, linkdedln, github, others, phone_number))
+                                "INSERT INTO parse( extracted_text, cleaned_text,emails, linkedin_link, github_link,extra_link) VALUES (%s, %s, %s, %s, %s, %s )",
+                                (text1, ftext, mailid, linkdedln, github, others,))
+    
+                        mysql.connection.commit()
+                        print("\n------MODELS--------\n")
+                        outparsed = parser(path)
+                        print("out:",outparsed)
+                        cur.execute(
+                                "INSERT INTO modelfinal( Name, Phone_Number,Email_id,Gender, DOB,Location,Pincode,Current_Job,TExperience,Designation,Company,Experience_Year,Projects,Degrees,College,YearOfPassout,Courses,Publication,Skills,Referr,Awards,University,Degree,CompaniesWorkedat) VALUES (%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s,%s,%s, %s, %s,%s)",
+                                ((personal1(outparsed.get('Personal Details')),) ,(personal2(outparsed.get('Personal Details')),) ,(personal3(outparsed.get('Personal Details')),), (personal4(outparsed.get('Personal Details')),), (personal5(outparsed.get('Personal Details')),) ,(personal6(outparsed.get('Personal Details')),),(personal7(outparsed.get('Personal Details'))) ,(cjob(outparsed),),(totalexp(outparsed),) ,(experdetails1(outparsed.get('Experience')),),(experdetails2(outparsed.get('Experience')),) ,(experdetails3(outparsed.get('Experience')),) ,(experdetails4(outparsed.get('Experience')),),(edudetails1(outparsed.get('Education')),) ,(edudetails2(outparsed.get('Education')),),(edudetails3(outparsed.get('Education')),),(edudetails4(outparsed.get('Education')),) ,(edudetails5(outparsed.get('Education')),) ,(skilldetails(outparsed.get('Skills')),),(refdetails(outparsed.get('Reference')),),(award(outparsed.get('Awards')),),(university(outparsed.get('university')),),(degrees(outparsed.get('degree')),),(cwat(outparsed.get('Companies worked at')),)   ,))
+                        mysql.connection.commit()
+                    #     text, link, mailid, ftext = fileconversion0000(
+                    #         path, num)
+                    #     linkdedln, github, others = get_links(link)
 
-                    dir_list = os.listdir(app.config['EXTRACTED'])
-                    for file_name in dir_list:
-                        source = e2 + file_name
-                        destination = f2 + file_name
-                        shutil.move(source, destination)
+                    #     cur.execute(
+                    #         "INSERT INTO parse( extracted_text, cleaned_text,emails, linkedin_link, github_link,extra_link) VALUES (%s, %s, %s, %s, %s, %s )",
+                    #         (text1, ftext, mailid, linkdedln, github, others,))
+
+                    # dir_list = os.listdir(app.config['EXTRACTED'])
+                    # for file_name in dir_list:
+                    #     source = e2 + file_name
+                    #     destination = f2 + file_name
+                    #     shutil.move(source, destination)
 
 
-                    for entity in entities:
-                        if entity in oo2.keys():
-                            values = oo2.get(entity)
-                            if (entity.replace(" ", "_").lower() in databaseattribute.keys()):
-                                databaseattribute.update(
-                                    {entity.replace(" ", "_").lower(): values})
+                    # for entity in entities:
+                    #     if entity in oo2.keys():
+                    #         values = oo2.get(entity)
+                    #         if (entity.replace(" ", "_").lower() in databaseattribute.keys()):
+                    #             databaseattribute.update(
+                    #                 {entity.replace(" ", "_").lower(): values})
 
-                    # print(databaseattribute)
-                    for key, values in databaseattribute.items():
-                        if (databaseattribute[key] == None):
-                            databaseattribute[key] = 'Null'
+                    # # print(databaseattribute)
+                    # for key, values in databaseattribute.items():
+                    #     if (databaseattribute[key] == None):
+                    #         databaseattribute[key] = 'Null'
 
-                    cur.execute("INSERT INTO model(unknown,name,degree,skills,college_name,university,graduation_year,companies_worked_at,designation,years_of_experience,location,address,rewards_achievements,projects) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
-                                (databasevalue(databaseattribute.get('unknown')), databasevalue(databaseattribute.get('name')), databasevalue(databaseattribute.get('degree')), databasevalue(databaseattribute.get('skills')), databasevalue(databaseattribute.get('college_name')), databasevalue(databaseattribute.get('university')), databasevalue(databaseattribute.get('graduation_year')), databasevalue(databaseattribute.get('companies_worked_at')), databasevalue(databaseattribute.get('designation')), databasevalue(databaseattribute.get('years_of_experience')), databasevalue(databaseattribute.get('location')), databasevalue(databaseattribute.get('address')), databasevalue(databaseattribute.get('rewards_achievements')), databasevalue(databaseattribute.get('projects')),))
+                    # cur.execute("INSERT INTO model(unknown,name,degree,skills,college_name,university,graduation_year,companies_worked_at,designation,years_of_experience,location,address,rewards_achievements,projects) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                    #             (databasevalue(databaseattribute.get('unknown')), databasevalue(databaseattribute.get('name')), databasevalue(databaseattribute.get('degree')), databasevalue(databaseattribute.get('skills')), databasevalue(databaseattribute.get('college_name')), databasevalue(databaseattribute.get('university')), databasevalue(databaseattribute.get('graduation_year')), databasevalue(databaseattribute.get('companies_worked_at')), databasevalue(databaseattribute.get('designation')), databasevalue(databaseattribute.get('years_of_experience')), databasevalue(databaseattribute.get('location')), databasevalue(databaseattribute.get('address')), databasevalue(databaseattribute.get('rewards_achievements')), databasevalue(databaseattribute.get('projects')),))
 
-                    cur.execute(
-                        "INSERT INTO list(email) VALUES (%s)", (mailid,))
+                    # cur.execute(
+                    #     "INSERT INTO list(email) VALUES (%s)", (mailid,))
 
-                    for key, values in databaseattribute.items():
-                        databaseattribute[key] = 'Null'
+                    # for key, values in databaseattribute.items():
+                    #     databaseattribute[key] = 'Null'
 
                 elif(name == 'rar'):
                     filename = secure_filename(file.filename)
@@ -266,42 +283,58 @@ def upload():
                         cur.execute("INSERT INTO deepbluecomp_table(files_path,binaryfiles_path) VALUES (%s, %s)",
                                     (filerename, binartfile))
                         print("------")
-                        text, text1, link, mailid, phone_number, date, human_name, add, pincode, ftext = fileconversion1(
-                            path, num)
+                        text1, link, mailid, ftext = fileconversion0000(
+                                path, num)
                         linkdedln, github, others = get_links(link)
-
+    
                         cur.execute(
-                            "INSERT INTO parse( extracted_text, cleaned_text,state, emails, linkedin_link, github_link,extra_link,phonenumber) VALUES (%s, %s, %s, %s, %s, %s, %s, %s )",
-                            (text1, ftext, pincode, mailid, linkdedln, github, others, phone_number))
-                        # moving on to final folder
-                    dir_list = os.listdir(app.config['EXTRACTED'])
-                    for file_name in dir_list:
-                        source = e2 + file_name
-                        destination = f2+ file_name
-                        shutil.move(source, destination)
+                                "INSERT INTO parse( extracted_text, cleaned_text,emails, linkedin_link, github_link,extra_link) VALUES (%s, %s, %s, %s, %s, %s )",
+                                (text1, ftext, mailid, linkdedln, github, others,))
+    
+                        mysql.connection.commit()
+                        print("\n------MODELS--------\n")
+                        outparsed = parser(path)
+                        print("out:",outparsed)
+                        cur.execute(
+                                "INSERT INTO modelfinal( Name, Phone_Number,Email_id,Gender, DOB,Location,Pincode,Current_Job,TExperience,Designation,Company,Experience_Year,Projects,Degrees,College,YearOfPassout,Courses,Publication,Skills,Referr,Awards,University,Degree,CompaniesWorkedat) VALUES (%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s,%s,%s, %s, %s,%s)",
+                                ((personal1(outparsed.get('Personal Details')),) ,(personal2(outparsed.get('Personal Details')),) ,(personal3(outparsed.get('Personal Details')),), (personal4(outparsed.get('Personal Details')),), (personal5(outparsed.get('Personal Details')),) ,(personal6(outparsed.get('Personal Details')),),(personal7(outparsed.get('Personal Details'))) ,(cjob(outparsed),),(totalexp(outparsed),) ,(experdetails1(outparsed.get('Experience')),),(experdetails2(outparsed.get('Experience')),) ,(experdetails3(outparsed.get('Experience')),) ,(experdetails4(outparsed.get('Experience')),),(edudetails1(outparsed.get('Education')),) ,(edudetails2(outparsed.get('Education')),),(edudetails3(outparsed.get('Education')),),(edudetails4(outparsed.get('Education')),) ,(edudetails5(outparsed.get('Education')),) ,(skilldetails(outparsed.get('Skills')),),(refdetails(outparsed.get('Reference')),),(award(outparsed.get('Awards')),),(university(outparsed.get('university')),),(degrees(outparsed.get('degree')),),(cwat(outparsed.get('Companies worked at')),)   ,))
+                        mysql.connection.commit()
+                    #     text,scraplink, eid, ftext= fileconversion0000(path, num)
+                    #     text, link, mailid, ftext = fileconversion0000(
+                    #         path, num)
+                    #     linkdedln, github, others = get_links(link)
 
-                    #oo2 = spacy_700(text2)
+                    #     cur.execute(
+                    #         "INSERT INTO parse( extracted_text, cleaned_text,emails, linkedin_link, github_link,extra_link) VALUES (%s, %s, %s, %s, %s, %s )",
+                    #         (text1, ftext, mailid, linkdedln, github, others,))
 
-                    for entity in entities:
-                        if entity in oo2.keys():
-                            values = oo2.get(entity)
-                            if (entity.replace(" ", "_").lower() in databaseattribute.keys()):
-                                databaseattribute.update(
-                                    {entity.replace(" ", "_").lower(): values})
+                    #     # moving on to final folder
+                    # dir_list = os.listdir(app.config['EXTRACTED'])
+                    # for file_name in dir_list:
+                    #     source = e2 + file_name
+                    #     destination = f2+ file_name
+                    #     shutil.move(source, destination)
 
-                    # print(databaseattribute)
-                    for key, values in databaseattribute.items():
-                        if (databaseattribute[key] == None):
-                            databaseattribute[key] = 'Null'
+                    # for entity in entities:
+                    #     if entity in oo2.keys():
+                    #         values = oo2.get(entity)
+                    #         if (entity.replace(" ", "_").lower() in databaseattribute.keys()):
+                    #             databaseattribute.update(
+                    #                 {entity.replace(" ", "_").lower(): values})
 
-                    cur.execute("INSERT INTO model(unknown,name,degree,skills,college_name,university,graduation_year,companies_worked_at,designation,years_of_experience,location,address,rewards_achievements,projects) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
-                                (databasevalue(databaseattribute.get('unknown')), databasevalue(databaseattribute.get('name')), databasevalue(databaseattribute.get('degree')), databasevalue(databaseattribute.get('skills')), databasevalue(databaseattribute.get('college_name')), databasevalue(databaseattribute.get('university')), databasevalue(databaseattribute.get('graduation_year')), databasevalue(databaseattribute.get('companies_worked_at')), databasevalue(databaseattribute.get('designation')), databasevalue(databaseattribute.get('years_of_experience')), databasevalue(databaseattribute.get('location')), databasevalue(databaseattribute.get('address')), databasevalue(databaseattribute.get('rewards_achievements')), databasevalue(databaseattribute.get('projects')),))
+                    # # print(databaseattribute)
+                    # for key, values in databaseattribute.items():
+                    #     if (databaseattribute[key] == None):
+                    #         databaseattribute[key] = 'Null'
 
-                    cur.execute(
-                        "INSERT INTO list(email) VALUES (%s)", (mailid,))
+                    # cur.execute("INSERT INTO model(unknown,name,degree,skills,college_name,university,graduation_year,companies_worked_at,designation,years_of_experience,location,address,rewards_achievements,projects) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                    #             (databasevalue(databaseattribute.get('unknown')), databasevalue(databaseattribute.get('name')), databasevalue(databaseattribute.get('degree')), databasevalue(databaseattribute.get('skills')), databasevalue(databaseattribute.get('college_name')), databasevalue(databaseattribute.get('university')), databasevalue(databaseattribute.get('graduation_year')), databasevalue(databaseattribute.get('companies_worked_at')), databasevalue(databaseattribute.get('designation')), databasevalue(databaseattribute.get('years_of_experience')), databasevalue(databaseattribute.get('location')), databasevalue(databaseattribute.get('address')), databasevalue(databaseattribute.get('rewards_achievements')), databasevalue(databaseattribute.get('projects')),))
 
-                    for key, values in databaseattribute.items():
-                        databaseattribute[key] = 'Null'
+                    # cur.execute(
+                    #     "INSERT INTO list(email) VALUES (%s)", (mailid,))
+
+                    # for key, values in databaseattribute.items():
+                    #     databaseattribute[key] = 'Null'
 
                 else:
                     filename = secure_filename(file.filename)
@@ -318,7 +351,6 @@ def upload():
                     path = binary[:x + 1] + "resume" + num + binary[y:]
                     filerename = "resume" + num + binary[y:]
                     os.rename(binary, path)
-                    #binary = "C:\\Users\\Yash\\PycharmProjects\\flask\\static\\files\\"+filename
                     binartfile = convertToBinary(path)
 
                     cur.execute(
@@ -326,76 +358,61 @@ def upload():
                     print(path)
                     mysql.connection.commit()
 
-                    text2, text1, link, mailid, phone_number, date, human_name, add, pincode, ftext = fileconversion1(
-                        path, num)
-                    linkdedln, github, others = get_links(link)
                     # add to database
+                    text1, link, mailid, ftext = fileconversion0000(
+                            path, num)
+                    linkdedln, github, others = get_links(link)
+
                     cur.execute(
-                        "INSERT INTO parse( extracted_text, cleaned_text,state, emails, linkedin_link, github_link,extra_link,phonenumber) VALUES (%s, %s, %s, %s, %s, %s, %s, %s )",
-                        (text2, ftext, pincode, mailid, linkdedln, github, others, phone_number))
+                            "INSERT INTO parse( extracted_text, cleaned_text,emails, linkedin_link, github_link,extra_link) VALUES (%s, %s, %s, %s, %s, %s )",
+                            (text1, ftext, mailid, linkdedln, github, others,))
 
+                    mysql.connection.commit()
                     print("\n------MODELS--------\n")
-                    print('------SPACY--------')
+                    outparsed = parser(path)
+                    print("out:",outparsed)
+                    cur.execute(
+                            "INSERT INTO modelfinal( Name, Phone_Number,Email_id,Gender, DOB,Location,Pincode,Current_Job,TExperience,Designation,Company,Experience_Year,Projects,Degrees,College,YearOfPassout,Courses,Publication,Skills,Referr,Awards,University,Degree,CompaniesWorkedat) VALUES (%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s,%s,%s, %s, %s,%s)",
+                            ((personal1(outparsed.get('Personal Details')),) ,(personal2(outparsed.get('Personal Details')),) ,(personal3(outparsed.get('Personal Details')),), (personal4(outparsed.get('Personal Details')),), (personal5(outparsed.get('Personal Details')),) ,(personal6(outparsed.get('Personal Details')),),(personal7(outparsed.get('Personal Details'))) ,(cjob(outparsed),),(totalexp(outparsed),) ,(experdetails1(outparsed.get('Experience')),),(experdetails2(outparsed.get('Experience')),) ,(experdetails3(outparsed.get('Experience')),) ,(experdetails4(outparsed.get('Experience')),),(edudetails1(outparsed.get('Education')),) ,(edudetails2(outparsed.get('Education')),),(edudetails3(outparsed.get('Education')),),(edudetails4(outparsed.get('Education')),) ,(edudetails5(outparsed.get('Education')),) ,(skilldetails(outparsed.get('Skills')),),(refdetails(outparsed.get('Reference')),),(award(outparsed.get('Awards')),),(university(outparsed.get('university')),),(degrees(outparsed.get('degree')),),(cwat(outparsed.get('Companies worked at')),)   ,))
+                    mysql.connection.commit()
+                    
+                    
+                    
+                    
 
-
-
-                    # for entity in entities:
-                    #     if entity in oo2.keys():
-                    #         values = oo2.get(entity)
-                    #         if (entity.replace(" ", "_").lower() in databaseattribute.keys()):
-                    #             databaseattribute.update(
-                    #                 {entity.replace(" ", "_").lower(): values})
-                    #
-                    # # print(databaseattribute)
-                    # for key, values in databaseattribute.items():
-                    #     if (databaseattribute[key] == None):
-                    #         databaseattribute[key] = 'Null'
-
-                    # cur.execute("INSERT INTO model(unknown,name,degree,skills,college_name,university,graduation_year,companies_worked_at,designation,years_of_experience,location,address,rewards_achievements,projects) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
-                    #             (databasevalue(databaseattribute.get('unknown')), databasevalue(databaseattribute.get('name')), databasevalue(databaseattribute.get('degree')), databasevalue(databaseattribute.get('skills')), databasevalue(databaseattribute.get('college_name')), databasevalue(databaseattribute.get('university')), databasevalue(databaseattribute.get('graduation_year')), databasevalue(databaseattribute.get('companies_worked_at')), databasevalue(databaseattribute.get('designation')), databasevalue(databaseattribute.get('years_of_experience')), databasevalue(databaseattribute.get('location')), databasevalue(databaseattribute.get('address')), databasevalue(databaseattribute.get('rewards_achievements')), databasevalue(databaseattribute.get('projects')),))
-                    #
-                    # cur.execute(
-                    #     "INSERT INTO list(email) VALUES (%s)", (mailid,))
-                    #
-                    # for key, values in databaseattribute.items():
-                    #     databaseattribute[key] = 'Null'
-
-
-                    # print(output_bert)
-                    # entities1 = predict(MODEL, TOKENIZER, idx2tag, tag2idx, DEVICE, text1)
-                    # output_bert = clean_bert(entities1, tags_vals)
-                    print("------NAME--------")
-                    path1 = path.replace("\\","\\\\")
-                    print(path1)
-                    parsedotput=parser(path1)
-                    print(parsedotput)
-
-
-                    # Linkdien
-                    # if linkdedln != None:
-                    #     if mailid or pincode is not None: #add here
-                    #         linkdien_data = linkedien_scrape(linkdedln[0])
-                    #         print(linkdien_data)
 
     mysql.connection.commit()
     cur.close()
     flash('File(s) successfully uploaded')
-    # return redirect('/upload')
     table_li = []
 
     cur = mysql.connection.cursor()
-    result = cur.execute('SELECT * FROM list')
+    result = cur.execute('SELECT can_id,Name,Degrees,Skills,TExperience,Email_id FROM modelfinal')
     # name,education,skills,experience,email
-    print(result)
     if result > 0:
         row = cur.fetchall()
-        print(row)
         for dict in row:
             table_li.append(list(dict.values()))
-        print(table_li)
 
     # return redirect('/upload')
     return render_template('table2.html', row=table_li)
+    
+    # # return redirect('/upload')
+    # table_li = []
+
+    # cur = mysql.connection.cursor()
+    # result = cur.execute('SELECT can_id,Name,Degrees,Skills,TExperience,Email_id FROM model')
+    # # name,education,skills,experience,email
+    # print(result)
+    # if result > 0:
+    #     row = cur.fetchall()
+    #     print(row)
+    #     for dict in row:
+    #         table_li.append(list(dict.values()))
+    #     print(table_li)
+
+    # # return redirect('/upload')
+    # return render_template('table2.html', row=table_li)
 
 
 @app.route("/delete")
@@ -423,24 +440,24 @@ def delete():
 
     return render_template('upload2.html')
 
-
+#table 2 page
 @app.route('/table', methods=["POST", "GET"])
 def table():
     table_li = []
 
     cur = mysql.connection.cursor()
-    result = cur.execute('SELECT * FROM list')
+    result = cur.execute('SELECT can_id,Name,Degrees,Skills,TExperience,Email_id FROM modelfinal')
     # name,education,skills,experience,email
     if result > 0:
         row = cur.fetchall()
         for dict in row:
             table_li.append(list(dict.values()))
-    # print(parser("C:\\Users\\Yash\\OneDrive\\Desktop\\resume2\\Supriya Resume-1.pdf"))
 
 
     return render_template('table2.html', row=table_li)
 
 
+#compare
 @app.route('/compare', methods=["POST", "GET"])
 def compare():
     table_data = []
@@ -449,7 +466,7 @@ def compare():
         cur = mysql.connection.cursor()
         for i in candiatecomparelist:
             compresult = cur.execute(
-                "Select linked_link,github_link,extra_link from datastore WHERE sr= %s ", (int(i),))
+                "Select can_id,Name,Degrees,Skills,Experience_Year,Email_id,CompaniesWorkedat,Projects from modelfinal WHERE can_id= %s ", (int(i),))
             print(compresult)
             if compresult > 0:
                 row = cur.fetchall()
@@ -460,21 +477,25 @@ def compare():
 
     return render_template('compare.html', cont=table_data)
 
-
+#statics table page
 @app.route('/statistic', methods=["POST", "GET"])
 def statistic():
     return render_template('statistic.html')
 
+
+#summary page
 @app.route('/summary/<int:project_id>', methods=["POST", "GET"])
 def summary(project_id):
     print(project_id)
     table_data = []
     linked_list = []
+    git_list=[]
+    summarry_list=[]
 
 
     cur = mysql.connection.cursor()
 
-    compresult = cur.execute("Select can_id,name,education,skills,experience,email from list WHERE can_id= %s ",
+    compresult = cur.execute("Select * from modelfinal WHERE can_id= %s ",
                                      (int(project_id),))
     if compresult > 0:
         row = cur.fetchall()
@@ -492,8 +513,29 @@ def summary(project_id):
             linked_list.append(list(dict.values()))
         print(linked_list)
 
-    return render_template('summarypage.html', cont=table_data , lindata=linked_list)
 
+    gitresult = cur.execute("Select GithubProjects from linkdien WHERE can_id= %s ",
+                             (int(project_id),))
+    if gitresult > 0:
+        row2 = cur.fetchall()
+        print("row ,", row2)
+        for dict in row2:
+            git_list.append(list(dict.values()))
+        print(git_list)
+
+    summaryresult = cur.execute("Select summary_A from linkdien WHERE can_id= %s ",
+                           (int(project_id),))
+    if summaryresult > 0:
+        row2 = cur.fetchall()
+        print("row ,", row2)
+        for dict in row2:
+            summarry_list.append(list(dict.values()))
+        print(summarry_list)
+
+    return render_template('summarypage.html', cont=table_data , lindata=linked_list,gitdata=git_list,summary=summarry_list)
+
+
+#files
 @app.route('/show/<int:can_id>', methods=["POST", "GET"])
 def show(can_id):
     print(can_id)
@@ -511,20 +553,17 @@ def show(can_id):
 
     return send_from_directory(UPLOAD_FOLDER,resume_path[0][0])
 
-# @app.route('/linkdein', methods=["POST", "GET"])
-# def show():
-#     emptyB()
-#      emptyBClean()
-#      linked_in_scrap(link)
-#      github_scrape(link)
-#     return 'sucess'
+
+#setting
 @app.route('/setting', methods=["POST", "GET"])
 def setting():
 
     return render_template('setting.html')
 
+#ranking
 @app.route('/rank', methods=["POST", "GET"])
 def rank():
+    rank_li=[]
     if request.method == "POST":
         education = request.form.getlist('education')
         othereducation=request.form.get('others')
@@ -541,49 +580,86 @@ def rank():
                 rank = ranking(jobdescription,data.get('cleaned_text'))
                 print(type(rank))
                 print("rank : ",rank)
-                cur.execute("UPDATE list SET ranked =%s WHERE can_id=%s",(rank,data.get('can_id')))
+                cur.execute("UPDATE modelfinal SET Rank =%s WHERE can_id=%s",(rank,data.get('can_id')))
                 # cur.execute(insertrank, (0.0, 1))
             mysql.connection.commit()
             # cur.close()
+            cur = mysql.connection.cursor()
+            result = cur.execute('SELECT can_id,Name,Degrees,Skills,TExperience,Rank FROM modelfinal ORDER BY Rank DESC')
+            # name,education,skills,experience,email
+            if result > 0:
+                row = cur.fetchall()
+                for dict in row:
+                    rank_li.append(list(dict.values()))
 
 
 
-    return render_template('setting.html')
+    return render_template('ranktable2.html',row=rank_li)
 
+
+#linkdien route
 @app.route('/linkedln',methods=["POST","GET"])
 def linkdedln():
-    count=18
+    # count=18
     cur = mysql.connection.cursor()
     # # while(count>=18):
-    # row = cur.execute("Select linkedin_link from parse WHERE can_id= %s",(18,))
-    # if row>0:
-    #         linkedlnlink=cur.fetchall()
-    #         link=linkedlnlink[0].get('linkedin_link')
-    #         print(link)
-    link=''
-    link=link.replace(',','')
-    if(link==''):
-                cur.execute("INSERT INTO linkdien(Education_l) VALUES (%s)",("Link Not Found"))
-                mysql.connection.commit()
-    else:
-                   try:
-                    emptyB()
-                    emptyBClean()
-                    flink=link.replace(',','')
-                    #linked_in_scrap('https://www.linkedin.com/in/kunal-wagh-1ab140217/')
-                    # cur.execute("UPDATE parse SET webscraplinkedln =%s WHERE can_id=%s", (linked_in_scrap(flink), count))
 
-                    linked_data=linked_in_scrap(flink)
-                    print("data : ",linked_data)
-                    cur.execute("INSERT INTO linkdien(Education_l ,Expirence_l ,Licenses_Certificates_l ,Skills_l,Projects_l,Honors_awards_l,Languages_l,About_l,Activity_l,Interest,Causes_l,Featured_l,Volunteering) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (linkedlndb(linked_data.get('Education')), linkedlndb(linked_data.get('Experience')), linkedlndb(linked_data.get('Licenses & certifications')),linkedlndb(linked_data.get('Skills')),linkedlndb(linked_data.get('Projects')),linkedlndb(linked_data.get('Honors & awards')),linkedlndb(linked_data.get('Languages')),linkedlndb(linked_data.get('About')),linkedlndb(linked_data.get('Activity')),linkedlndb(linked_data.get('Interests')),linkedlndb(linked_data.get('Causes')),linkedlndb(linked_data.get('Featured')),linkedlndb(linked_data.get('Volunteering'))))
+    row = cur.execute("Select cleaned_text,linkedin_link,github_link from parse ")
+    if row>0:
+             linkedlnlink=cur.fetchall()
+             # link=linkedlnlink[0].get('linkedin_link')
+             print(linkedlnlink)
+    count = 1
+    
+    for subdic in linkedlnlink:
+        link = ''
+        cleaneddata=""
+        cleaneddata=subdic.get('cleaned_text')
+        link=subdic.get('linkedin_link')
+        github=subdic.get('github_link')
+        print(count)
+
+
+        link=link.replace(',','')
+        if(link=='' and github==''):
+                    summary1= summary(cleaneddata,model_summary)
+                    print(summary1)
+                    cur.execute("INSERT INTO linkdien(Education_l,summary_A,GithubProjects) VALUES (%s,%s,%s)",("Link Not Found",summary1,"Link Not Found",))
                     mysql.connection.commit()
-                   except:
-                       cur.execute("INSERT INTO linkdien(Education_l) VALUES (%s)", ("Technical issue"))
+        else:
+                       # try:
+                        emptyB()
+                        emptyBClean()
+                        flink=link.replace(',','')
+                        # cur.execute("UPDATE parse SET webscraplinkedln =%s WHERE can_id=%s", (linked_in_scrap(flink), count))
+
+                        linked_data=linked_in_scrap(flink)
+                        
+                        print("data : ",linked_data)
+                        summary1= summary(cleaneddata,model_summary)
+                        print(summary1)
+
+                        cur.execute("INSERT INTO linkdien(Education_l ,Expirence_l ,Licenses_Certificates_l ,Skills_l,Projects_l,Honors_awards_l,Languages_l,About_l,Activity_l,Interest,Causes_l,Featured_l,Volunteering,summary_A) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)", (linkedlndb(linked_data.get('Education')), linkedlndb(linked_data.get('Experience')), linkedlndb(linked_data.get('Licenses & certifications')),linkedlndb(linked_data.get('Skills')),linkedlndb(linked_data.get('Projects')),linkedlndb(linked_data.get('Honors & awards')),linkedlndb(linked_data.get('Languages')),linkedlndb(linked_data.get('About')),linkedlndb(linked_data.get('Activity')),linkedlndb(linked_data.get('Interests')),linkedlndb(linked_data.get('Causes')),linkedlndb(linked_data.get('Featured')),linkedlndb(linked_data.get('Volunteering')),summary1,))
+                        mysql.connection.commit()
+                       # except:
+                       #     cur.execute("INSERT INTO linkdien(Education_l) VALUES (%s)", ("Technical issue"))
 
 
-        # count = count - 1
-    mysql.connection.commit()
-    return 'sucess'
+        count = count + 1
+        mysql.connection.commit()
+    table_li = []
+    cur = mysql.connection.cursor()
+    result = cur.execute('SELECT can_id,Name,Degrees,Skills,TExperience,Email_id FROM modelfinal')
+    # name,education,skills,experience,email
+    if result > 0:
+        row = cur.fetchall()
+        for dict in row:
+            table_li.append(list(dict.values()))
+
+    # return redirect('/upload')
+    return render_template('table2.html', row=table_li)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

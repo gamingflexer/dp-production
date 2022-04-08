@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='summarypage.css') }}"> -->
+    <link rel="stylesheet" href="../static/summarypage.css">
+    
+    <script src="https://kit.fontawesome.com/2360843bb3.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- <script src="static\table2.js"></script> -->
+    <title>Document</title>
+</head>
+<body>
+    <div class="logo">
+        <ul>
+            <li class="logo1"><a href="/home"><i class="fa-brands fa-microsoft"></i></a></li>
+            <li class="logo1"><a href="/upload2"><img src="../static/image\4.png" class="home"></a></li>
+            <li class="logo1"><a href="/table"><img src="../static/image/3.png" class="candiate"></a></li>
+            <li class="logo1"><a href="/statistic"><img src="../static/image/1.png" class="statistic"></a></li>
+            <li class="logo1"><a href="#"><img src="../static/image/2.png" class="setting1"></a></li>
+            <li class="logo1"><a href="#"><img src="../static/image/5.png" class="setting"></a></li>
+            <li class="logo1"><a href="#"><img src="../static/image/acc.png" class="account"></a></li>
+
+
+
+
+        </ul>
+        
+    </div>
+    <div class="con">
+        <div class="data">
+            {% for data in cont %}
+            <div class="subtittle"><p>Candiate Id : </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[0]}}</div></div>
+            <div class="subtittle"><p>Candiate Name : </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[1]}}</div></div>
+            <div class="subtittle"><p>Education : </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[2]}}</div></div>
+            {% if (data[3] != "Null") and (data[3] != None) and (data[3] != "null") %}
+                <div class="subtittle"><p>Skills: </p></div>
+                <div class="datacontent"><div class="innercontent">{{data[3]}}</div></div>
+            {% endif %}
+
+            <div class="subtittle"><p>Experience : </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[4]}}</div></div>
+            <div class="subtittle"><p>Email Id : </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[5]}}</div></div>
+            <div class="subtittle"><p>link : </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[5]}}</div></div>
+            
+            {% endfor %} 
+
+            {% for linked in lindata %}
+
+            {% if (linked[0] != "Link Not Found") and (linked[0] != "Technical issue") %}
+             <div class="litittle"><div><p class="Linkedln">Linkedln Profile</p></div></div> 
+             {% if (linked[0] != "null") and (linked[0] != "Null") and (linked[0] !="") %}
+             <div class="subtittle"><p>Qualification : </p></div>
+            <div class="datacontent"><div class="innercontent">{{linked[0]}}</div></div>
+            {% endif %}
+            {% if (linked[1] != "null") and (linked[1] != "Null") and (linked[1] !="") %}
+            <div class="subtittle"><p>Experience : </p></div>
+            <div class="datacontent"><div class="innercontent">{{linked[1]}}</div></div>
+            {% endif %}
+            {% if (linked[2] != "null") and (linked[2] != "Null") and (linked[2] !="") %}
+            <div class="subtittle"><p>Certificates : </p></div>
+            <div class="datacontent"><div class="innercontent">{{linked[2]}}</div></div>
+            {% endif %}
+            {% if (linked[3] != "null") and (linked[3] != "Null") and (linked[3] !="") %}
+            <div class="subtittle"><p>Skills : </p></div>
+            <div class="datacontent"><div class="innercontent">{{linked[3]}}</div></div>
+            {% endif %}
+            {% if (linked[4] != "null") and (linked[4] != "Null") and (linked[4] !="") %}
+            <div class="subtittle"><p>Projects : </p></div>
+            <div class="datacontent"><div class="innercontent">{{linked[4]}}</div></div>
+            {% endif %}
+            {% if (linked[5] != "null") and (linked[5] != "Null") and (linked[5] !="") %}
+            <div class="subtittle"><p>Awards : </p></div>
+            <div class="datacontent"><div class="innercontent">{{linked[5]}}</div></div>
+            {% endif %}
+            {% if (linked[6] != "null") and (linked[6] != "Null") and (linked[6] !="") %}
+            <div class="subtittle"><p>Languages : </p></div>
+            <div class="datacontent"><div class="innercontent">{{linked[6]}}</div></div>
+            {% endif %}
+            {% if (linked[7] != "null") and (linked[7] != "Null") and (linked[7] !="") %}
+            <div class="subtittle"><p>About : </p></div>
+            <div class="datacontent"><div class="innercontent">{{linked[7]}}</div></div>
+            {% endif %}
+            {% if (linked[8] != "null") and (linked[8] != "Null") and (linked[8] !="") %}
+            <div class="subtittle"><p>Activity : </p></div>
+            <div class="datacontent"><div class="innercontent">{{linked[8]}}</div></div>
+            {% endif %}
+            {% if (linked[9] != "null") and (linked[9] != "Null") and (linked[9] !="") %}
+            <div class="subtittle"><p>Interest : </p></div>
+            <div class="datacontent"><div class="innercontent">{{linked[9]}}</div></div>
+            {% endif %}
+
+            {% endif %}
+
+            {% endfor %}
+            <div class="subtittle"><p>Summarry : </p></div>
+        
+            <div class="datacontent"><div class="innercontent">Summary is</div></div>
+            
+        </div>
+        <div class="resumelink">
+            <a href="/show/{{cont[0][0]}}" class="resumeli">View Resume </a>
+        </div>
+    </div>

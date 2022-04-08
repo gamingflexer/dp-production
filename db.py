@@ -1,4 +1,4 @@
-from preprocessing import url_func,email,get_phone_numbers,data_grabber,address_grabber,pincode_grabber,get_human_names,pre_process1_rsw1,remove_hexcode_rhc
+from preprocessing import * #url_func,email,get_phone_numbers,data_grabber,address_grabber,pincode_grabber,get_human_names,pre_process1_rsw1,remove_hexcode_rhc
 
 
 def databasevalue(listofvalues):
@@ -29,6 +29,7 @@ def givedata(text):
             scraplink = scraplink + "  " + i
 
     mailid = email(text)
+    mailid=set(mailid)
     for i in mailid:
         eid = i + "  " + eid
     if (eid is None):
@@ -62,10 +63,16 @@ def givedata(text):
     else:
         for ad in add:
             address = address + "  " + ad
+    
+    # try:
 
     pincode = pincode_grabber(text)
-
+    print("fileconversion : ",text)
     text1 = pre_process1_rsw1(text)
-
     ftext = remove_hexcode_rhc(text1)
+    # except:
+    #     pincode = "NAN"
+    #     text1= "NAN"
+    #     ftext = "NAN"
+        
     return (text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)

@@ -14,8 +14,13 @@ import numpy as np
 from fuzzywuzzy import fuzz
 import phonenumbers
 from parser1 import config_p
-import utils
-from model import ner
+from parser1 import utils
+
+from transformers import AutoTokenizer, AutoModelForTokenClassification, pipeline
+
+tokenizer_bert_ner = AutoTokenizer.from_pretrained("dslim/bert-base-NER")
+model_bert_ner = AutoModelForTokenClassification.from_pretrained("dslim/bert-base-NER")
+
 
 nlp = config_p.en_sm
 nlp.add_pipe(LanguageDetector(), name="language_detector", last=True)
@@ -122,7 +127,7 @@ def get_skills(custom_entities, text):
     if len(exp.split('\n')) < 4:
         exp = ''
         for ind, line in enumerate(lines):
-            if len(line.split()) < 8 and ('skills' in line.lower() or 'expertise' in line.lower() or 'strength' in line.lower() or 'proficiency' in line.lower()):
+            if len(line.split()) < 8 and ('skills' in line.lower() or 'expertise' in line.lower() or 'strength' in line.lower() or 'proficiency' in line.lower() or 'competence' in line.lower() or 'mastery' in line.lower() or 'aptitude' in line.lower()):
                 try:
                     try:
                         try:
@@ -585,7 +590,7 @@ def get_personal(custom_entities, data):
     emailid = get_email(data)
     name = get_name(custom_entities, data)
     if (name==None or name=="None"):
-        name = ner(data)
+        name = ner(data,model_bert_ner,tokenizer_bert_ner)
     else:
         name='None-'
     phoneno = get_phonenumber(data)
@@ -886,3 +891,41 @@ def get_reference(text):
         reference.append({"Name": name, "Desingation": des,
                          "Emailid": emailids, "Phone Number": ph})
     return reference
+
+
+def ner(text, model, tokenizer):
+    # create a pipleine to get the output
+    nlp_name = pipeline('ner', model=model, tokenizer=tokenizer)
+    ner_list = nlp_name(text)
+
+    # Person Name
+    this_name = []
+    all_names_list_tmp = []
+
+    for ner_dict in ner_list:
+        if ner_dict['entity'] == 'B-PER':
+            if len(this_name) == 0:
+                this_name.append(ner_dict['word'])
+            else:
+                all_names_list_tmp.append([this_name])
+                this_name = []
+                this_name.append(ner_dict['word'])
+        elif ner_dict['entity'] == 'I-PER':
+            this_name.append(ner_dict['word'])
+
+    all_names_list_tmp.append([this_name])
+
+    final_name_list = []
+    for name_list in all_names_list_tmp:
+        full_name = ' '.join(name_list[0]).replace(
+            ' ##', '').replace(' .', '.')
+        final_name_list.append([full_name])
+
+    if (len(final_name_list)) > 1:
+        final_name_list2 = str(final_name_list[0]) + str(final_name_list[1])
+        final_name_list2 = final_name_list2.replace("]", "")
+        final_name_list2 = final_name_list2.replace("[", "")
+        final_name_list2 = final_name_list2.replace("'", "")
+        final_name_list2 = final_name_list2.replace("]", "")
+
+    return final_name_list

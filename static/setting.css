@@ -10,9 +10,10 @@ html{
     display: inline-block;
 }
 body{
-    background: linear-gradient(90deg, rgba(27,101,152,1) 12%, rgba(11,164,204,1) 51%, rgba(18,173,213,1) 100%);
+    /* background: linear-gradient(90deg, rgba(27,101,152,1) 12%, rgba(11,164,204,1) 51%, rgba(18,173,213,1) 100%); */
+    background-color: #f1f1f1;
     height: 94.5vh;
-
+    font-family: 'Poppins', sans-serif;
 }
 .logo{
     
@@ -185,9 +186,12 @@ background: linear-gradient(90deg, rgba(13,89,161,1) 0%, rgba(44,172,185,1) 0%, 
 .educationsubtiitle , .jobsubtiitle{
     margin-left: 1rem;
     /* margin-top: 1rem; */
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     
 
+}
+.jobsubtiitle{
+    margin-top: 1.2rem;
 }
 .education{
     margin-left: 6rem;
@@ -247,6 +251,7 @@ textarea{
 .sub{
     width: 8rem;
     padding: 1rem;
-    border-radius: 1.5rem;
-    background: linear-gradient(90deg, rgba(27,101,152,1) 12%, rgba(11,164,204,1) 51%, rgba(18,173,213,1) 100%);
+    border-radius: 1.5rem; 
+    /* background: linear-gradient(90deg, rgba(27,101,152,1) 12%, rgba(11,164,204,1) 51%, rgba(18,173,213,1) 100%); */
+    background-color: #f1f1f1;
 }

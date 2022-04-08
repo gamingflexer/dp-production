@@ -21,9 +21,11 @@ from simplet5 import SimpleT5
 from constants import *
 from config import spacy_700_path
 from preprocessing import remove_hexcode_rhc, summary_clean
-from fileconversion import fileconversion1
+from fileconversion import fileconversion0000
 from parser2 import resumeparse
 from parser1 import mainML
+from parser1 import *
+from parser2 import *
 from preprocessing import dict_clean, summary_clean
 
 spell = Speller(fast=True, lang='en')
@@ -33,11 +35,11 @@ spell = Speller(fast=True, lang='en')
 def parser(fname):
     p4 =[]
     to_delete = ['email', 'phone', 'name', 'total_exp',
-                 'designition','FileName', 'File Language']  # 2
+                 'designition','FileName','skills', 'File Language']  # 2
     p1 = mainML.get_parsed(fname)
     p2 = resumeparse.read_file(fname)
-    p3 = spacy_700(fname)
-    print(f'P3-testing ---- {p3}')
+    # p3 = spacy_700(fname)
+    # print(f'P3-testing ---- {p3}')
 
     p1.update(p2)
     for i in to_delete:
@@ -46,15 +48,19 @@ def parser(fname):
         except:
             continue
     #skills merge
-    p4 = p1['Skills'] + p1['skills']
-    p1.pop('Skills')
-    p1.pop('skills')
+    # p4 = p1['Skills'] + p1['skills']
+    # p1.pop('Skills')
+    # p1.pop('skills')
     
     #remove bad words in skills
-    for bad in BAD_words:
-        p4.remove(bad)
+    # try:
+    #   for bad in BAD_words:
+    #       p4.remove(bad)
+    # except:
+    #   pass
+
         
-    p1.update({"Skills":p4})
+    # p1.update({"Skills":p4})
     p2 = dict_clean(p1)
     return p2
 
@@ -62,7 +68,7 @@ def parser(fname):
 
 
 def spacy_700(path):
-    text = fileconversion1(path)
+    text = fileconversion1(path,y=0)
     o1 = {}
     spacy_700_list = []
     model_spacy_path_all = spacy_700_path

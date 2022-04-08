@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../static/setting.css">
+    <script src="https://kit.fontawesome.com/2360843bb3.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="logo">
+        <ul>
+            <li class="logo1"><a href="/"><i class="fa-brands fa-microsoft"></i></a></li>
+            <li class="logo1"><a href="/upload2"><img src="static\image\4.png" class="home"></a></li>
+            <li class="logo1"><a href="templates\table2.html"><img src="static\image\3.png" class="candiate"></a></li>
+            <li class="logo1"><a href="/statistic"><img src="static\image\1.png" class="statistic"></a></li>
+            <li class="logo1"><a href="/setting"><img src="static\image\2.png" class="setting1"></a></li>
+            <li class="logo1"><a href="#"><img src="static\image\5.png" class="setting"></a></li>
+            <li class="logo1"><a href="#"><img src="static\image\acc.png" class="account"></a></li>
+  
+  
+  
+  
+        </ul>
+        
+    </div>
+    <div class="pagecontent">
+    <form action="/rank" method="post">
+        <!--  
+        <div class="skillssubtiitle">
+            <h2>Skills</h2>
+        </div>
+        <div class="skills">
+        <div class="buttons">
+           <div class="check"> 
+            <input type="checkbox" name="skills" value="Web Developer" > <p class="skillsname">Web Developer</p>
+        </div>
+        </div>
+        <div class="buttons">
+            <div class="check"> 
+            <input type="checkbox" name="skills" value="Andriod Developer"><p class="skillsname">Andriod Developer</p>
+        </div>
+        </div>
+        <div class="buttons">
+            <div class="check"> 
+            <input type="checkbox" name="skills" value="Java Developer"><p class="skillsname">Java Developer</p>
+        </div>
+        </div>
+        <div class="buttons">
+            <div class="check"> 
+            <input type="checkbox" name="skills" value="Python Developer"><p class="skillsname">Python Developer</p>
+        </div>
+        </div>
+        
+        <div class="buttons">
+            <div class="check"> 
+            <input type="checkbox" name="skills" value="Cloud Computing"><p class="skillsname">Cloud Computing</p>
+        </div>
+        </div>
+        <div class="others">
+            <input type="text"  name="others" placeholder="others required skills" class="contother">
+
+        </div>
+    </div> -->
+
+<!-- For Educations -->
+<div class="educationsubtiitle">
+    <h2>Educations</h2>
+</div>
+<div class="education">
+<div class="buttons" id="button1">
+   <div class="check" > 
+    <input type="checkbox" name="education" value="12th" onchange='handleChange1(this);'> <p class="degree"> 12th </p>
+</div>
+</div>
+<div class="buttons" id="button2">
+    <div class="check"> 
+    <input type="checkbox" name="education" value="B.e IT" onchange='handleChange2(this);'><p class="degree" >B.e IT</p>
+</div>
+</div>
+<div class="buttons" id="button3">
+    <div class="check"> 
+    <input type="checkbox" name="education" value="B.e Computer" onchange='handleChange3(this);'><p class="degree">B.e Computer</p>
+</div>
+</div>
+<div class="buttons" id="button4">
+    <div class="check"> 
+    <input type="checkbox" name="education" value="B.tech IT" onchange='handleChange4(this);'><p class="degree">B.tech IT</p>
+</div>
+</div>
+
+<div class="buttons" id="button5">
+    <div class="check"> 
+    <input type="checkbox" name="education" value="B.tech Comp" onchange='handleChange5(this);'><p class="degree">Cloud Computing</p>
+</div>
+</div>
+<div class="others">
+    <input type="text"  name="others" placeholder="others required educations" class="contother" >
+
+</div>
+</div>
+<div class="jobsubtiitle">
+    <h2>Job Description</h2>
+</div>
+<div class="jobdes">
+    <div class="contjobdes">
+        <textarea name="jobtext" class="content" placeholder="What quality are you looking in Candiate?" ></textarea>
+
+    </div>
+</div>
+
+<div class="outersub">
+    <div class="subbtn">
+     <input type="submit" value=" Submit " class="sub">
+    </div>  
+    </form>
+</div>
+<script>
+    function handleChange1(checkbox) {
+        if(checkbox.checked == true){
+        document.getElementById("button1").setAttribute("class","afterchange");
+    }
+    else{
+        document.getElementById("button1").setAttribute("class","buttons");
+
+    }
+    }
+
+    function handleChange2(checkbox) {
+        if(checkbox.checked == true){
+        document.getElementById("button2").setAttribute("class","afterchange");
+    }
+    else if(checkbox.checked == false){
+        document.getElementById("button2").setAttribute("class","buttons");
+    }
+    }
+    function handleChange3(checkbox) {
+        if(checkbox.checked == true){
+        document.getElementById("button3").setAttribute("class","afterchange");
+    }
+    else{
+        document.getElementById("button3").setAttribute("class","buttons");
+
+    }
+
+    }
+
+    function handleChange4(checkbox) {
+        if(checkbox.checked == true){
+        document.getElementById("button4").setAttribute("class","afterchange");
+    }
+    else{
+        document.getElementById("button4").setAttribute("class","buttons");
+
+    }
+    }
+
+    function handleChange5(checkbox) {
+        if(checkbox.checked == true){
+        document.getElementById("button5").setAttribute("class","afterchange");
+    }
+    else{
+        document.getElementById("button5").setAttribute("class","buttons");
+
+    }
+    }
+</script>
+</body>
+</html>

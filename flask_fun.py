@@ -5,7 +5,7 @@ from blurr.data.all import HF_Seq2SeqBlock,HF_Seq2SeqBeforeBatchTransform
 from blurr.modeling.all import HF_BaseModelWrapper,HF_BaseModelCallback,HF_Seq2SeqMetricsCallback,BLURR,seq2seq_splitter
 from config import summary_db
 
-from fileconversion import fileconversion1
+from fileconversion import fileconversion0000
 from preprocessing import*
 from linkedIn import*
 from model import*
@@ -69,7 +69,7 @@ def Summary_run():
                     opt_func=ranger,loss_func=CrossEntropyLossFlat(),
                     cbs=learn_cbs,splitter=partial(seq2seq_splitter, arch=hf_arch)).to_fp16()
     
-    return "Model Loadded - Extractive summarization"
+    return learn
 
 
 # functions

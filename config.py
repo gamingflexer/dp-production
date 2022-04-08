@@ -7,8 +7,7 @@ basepath = os.path.dirname(os.path.realpath(__file__))
 #change accordinly
 summary_model = '/Users/cosmos/Documents/DP-ref/Summary-100'
 # bert_dict_path = "/home/aiworkstation2/Music/ser/DeepBlue/flask/models/model_e10.tar"
-index = "\\"
-driver_path = "C:\\Users\\Yash\\Downloads\\chromedriver_win32 (1)"
+index = "/"
 summary_model = os.path.join(basepath,"models","outputs-100-out-lenght")
 summary_db = os.path.join(basepath,"models","Summary-db.csv")
 summary_extractive = os.path.join(basepath,"models","Extractive_BART")
@@ -16,6 +15,7 @@ summary_extractive = os.path.join(basepath,"models","Extractive_BART")
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 #not to change
 spacy_700_path = os.path.join(basepath,"models/DP/new")
+
 f2 = os.path.join(basepath,"static","files/")
 e2 = os.path.join(basepath,"static","extracted/")
 z2 = os.path.join(basepath,"static","zip/")

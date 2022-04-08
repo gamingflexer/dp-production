@@ -10,9 +10,11 @@ html{
    
 }
 body{
-    background: rgb(27,101,152);
-    background: linear-gradient(90deg, rgba(27,101,152,1) 12%, rgba(11,164,204,1) 51%, rgba(18,173,213,1) 100%);
+    /* background: rgb(27,101,152);
+    background: linear-gradient(90deg, rgba(27,101,152,1) 12%, rgba(11,164,204,1) 51%, rgba(18,173,213,1) 100%); */
+    background-color: #F1F1F1;
     height: 94.5vh;
+    font-family: 'Poppins', sans-serif;
 }
 .logo{
     
@@ -88,6 +90,7 @@ a{
       transform: translate(-50%,-50%);  
       text-align: center;
       z-index: 2;
+      background-color: rgb(221, 213, 213);
  }
  i{
      font-size: 7rem;
@@ -97,12 +100,13 @@ a{
  }
  .file-input{
      border: 0.7rem solid black;
+     border-radius: 1rem;
  }
  .btn{
      background-color: #0d59a1;
      color: white;
      padding: 0.8rem;
-     border: 0.3rem solid lightgreen;
+     border: 0.3rem solid white;
      border-radius: 0.5rem;
      font-weight: 700;
  }

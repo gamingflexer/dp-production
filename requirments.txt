@@ -10,6 +10,7 @@ opencv-python
 fpdf
 docx2pdf
 pytesseract
+python-Levenshtein
 Pillow
 pdfkit
 textract

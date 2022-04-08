@@ -8,10 +8,11 @@ import pytesseract
 from tika import parser
 from db import givedata
 from autocorrect import Speller
+from preprocessing import *
 
 spell = Speller(only_replacements=True)
 
-def fileconversion1(filename, y):
+def fileconversion0000(filename, y):
     eid=""
     phno=""
     f_human_name=""
@@ -26,10 +27,7 @@ def fileconversion1(filename, y):
     extension = filename[x + 1:]
     if (extension == "docx"):
       try:
-        converted = "resume" + y + ".pdf"
-        name = "D:\\deepbluefiles\\" + converted
-        convert(filename, name)
-        raw = parser.from_file(name)
+        raw = parser.from_file(filename)
         text = raw['content']
         text = text.replace("\n", " ")
         text = text.replace("\t", " ")
@@ -68,13 +66,11 @@ def fileconversion1(filename, y):
       text = text.replace("\t", " ")
       print(text)
 
-      return (text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
+      return (text,scraplink, eid, ftext)
 
     elif (extension == "png" or extension == "jpg" or extension=="jpeg"):
       try:
-          converted = "resume" + y + ".txt"
-          name = "D:\\deepbluefiles\\" + converted
-          file = open(name, "w")
+          file = open(filename, "w")
           pdf = FPDF()
           pdf.add_page()
           fpdf = FPDF('L', 'cm', (500, 550))
@@ -90,7 +86,7 @@ def fileconversion1(filename, y):
           cv2.imshow('Result', img)
 
           file.close()
-          f = open(name, 'r')
+          f = open(filename, 'r')
           name1 = "D:\\deepbluefiles\\" + "resume" + y + ".pdf"
           for x in f:
             x = x.replace("\n", " ")
@@ -98,13 +94,14 @@ def fileconversion1(filename, y):
             pdf.cell(200, 10, txt=x, ln=1, align='L')
 
           pdf.output(name1)
-          raw = parser.from_file(name1)
+          raw = parser.from_file(filename)
           text = raw['content']
           text = spell(text)
           text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext = givedata(text)
       except:
           try:
               text = textract.process(filename)
+              text = text.decode('utf-8')
               text = text.replace("\n", " ")
               text = text.replace("\t", " ")
               text = spell(text)
@@ -131,15 +128,13 @@ def fileconversion1(filename, y):
 
       # text = textract.process(filename)
 
-      return (text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
+      return (text,scraplink, eid, ftext)
 
         #cursor.execute("INSERT INTO datastore( data, link, emailid, phoneno, date, humaname, address, code, data_two) VALUES (%s, %s )",(text1, link, mailid, phone_number, date, human_name, add, pincode, ftext))
     #   cv2.waitKey(0)
 
     elif (extension == "txt"):
       try:
-        converted = "resume" + y + ".pdf"
-        name = "D:\\deepbluefiles\\" + converted
         pdf = FPDF()
         pdf.add_page()
         fpdf = FPDF('L', 'cm', (500, 550))
@@ -148,8 +143,8 @@ def fileconversion1(filename, y):
         for x in f:
             pdf.cell(200, 10, txt=x, ln=1, align='L')
 
-        pdf.output(name)
-        raw = parser.from_file(name)
+        pdf.output(filename)
+        raw = parser.from_file(filename)
         text = raw['content']
         text = spell(text)
         text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext = givedata(text)
@@ -179,14 +174,14 @@ def fileconversion1(filename, y):
                   address = "NAN"
                   pincode = "NAN"
                   ftext = "NAN"
-      return (text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
+      return (text,scraplink, eid, ftext)
 
     elif (extension == "html"):
        try:
         converted = "resume" + y + ".pdf"
         name = "D:\\deepbluefiles\\" + converted
         with open(filename) as f:
-            pdfkit.from_file(f, name)
+            pdfkit.from_file(f, filename)
         raw = parser.from_file(name)
         text = raw['content']
         text = spell(text)
@@ -218,7 +213,7 @@ def fileconversion1(filename, y):
                    pincode = "NAN"
                    ftext = "NAN"
 
-       return (text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
+       return (text,scraplink, eid, ftext)
 
 
 
@@ -247,7 +242,7 @@ def fileconversion1(filename, y):
                 pincode = "NAN"
                 ftext = "NAN"
 
-        return (text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
+        return (text,scraplink, eid, ftext)
 
     elif (extension == "odt"):
         try:
@@ -274,7 +269,7 @@ def fileconversion1(filename, y):
                 pincode = "NAN"
                 ftext = "NAN"
 
-        return (text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
+        return (text,scraplink, eid, ftext)
 
     elif (extension == "doc"):
         try:
@@ -301,37 +296,39 @@ def fileconversion1(filename, y):
                 pincode = "NAN"
                 ftext = "NAN"
 
-        return (text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
+        return (text,scraplink, eid, ftext)
     elif(extension == "pdf"):
         try:
             raw = parser.from_file(filename)
             text = raw['content']
             text = spell(text)
+            print("under try1 text : ",text)
             text,text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext=givedata(text)
             print("underfile")
+
         except:
-            try:
+            # try:
                 raw = parser.from_file(filename)
                 text = raw['content']
-                text=text.decode('utf-8')
                 text = spell(text)
+                print("under try2 text : ",text)
                 text, text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext = givedata(text)
-            except:
-                text = "Text Not Extracted"
-                text1 = "NAN"
-                scraplink = "NAN"
-                eid = "NAN"
-                phno = "NAN"
-                fdate = "NAN"
-                f_human_name = "NAN"
-                address = "NAN"
-                pincode = "NAN"
-                ftext = "NAN"
-                print("under except")
+            # except:
+                # text = "Text Not Extracted"
+                # text1 = "NAN"
+                # scraplink = "NAN"
+                # eid = "NAN"
+                # phno = "NAN"
+                # fdate = "NAN"
+                # f_human_name = "NAN"
+                # address = "NAN"
+                # pincode = "NAN"
+                # ftext = "NAN"
+                # print("under except")
 
 
 
-    return (text,text1, scraplink, eid, phno, fdate, f_human_name, address, pincode, ftext)
+    return text,scraplink, eid, ftext
 
 
 

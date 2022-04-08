@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='table2.css') }}">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/2360843bb3.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="static\table2.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="logo">
+        <ul>
+            <li class="logo1"><a href="/home"><i class="fa-brands fa-microsoft"></i></a></li>
+            <li class="logo1"><a href="/upload2"><img src="static\image\4.png" class="home"></a></li>
+            <li class="logo1"><a href="/table"><img src="static\image\3.png" class="candiate"></a></li>
+            <li class="logo1"><a href="/statistic"><img src="static\image\1.png" class="statistic"></a></li>
+            <li class="logo1"><a href="/setting"><img src="static\image\2.png" class="setting1"></a></li>
+            <li class="logo1"><a href="#"><img src="static\image\5.png" class="setting"></a></li>
+            <li class="logo1"><a href="#"><img src="static\image\acc.png" class="account"></a></li>
+
+
+
+
+        </ul>
+        
+    </div>
+    <div id="bodyselect">
+        <form method="post" action="/select">
+            <div class="inpselect">
+            <div class="checkrow"><input type="checkbox" id=" seledata"value="Name" name="selectedcolumn"><p>Name </p><br></div>
+           <div class="checkrow"><input type="checkbox" id=" seledata" value="Email_id" name="selectedcolumn"><p>Email-Id </p><br></div>
+           <div class="checkrow"><input type="checkbox" id=" seledata" value="Current_Job" name="selectedcolumn"><p>Current Job </p><br></div>
+           <div class="checkrow"> <input type="checkbox" id=" seledata" value="Designation" name="selectedcolumn"><p>Designation </p><br></div>
+           <div class="checkrow"> <input type="checkbox" id=" seledata" value="Projects" name="selectedcolumn"><p>Projects </p><br></div>
+           <div class="checkrow"><input type="checkbox" id=" seledata" value="Courses" name="selectedcolumn"><p>Courses </p><br></div>
+           <div class="checkrow"><input type="checkbox"id=" seledata" value="Skills" name="selectedcolumn"><p>Skills </p><br></div>
+           <div class="checkrow"><input type="checkbox" id=" seledata" value="References" name="selectedcolumn"><p>Reference</p><br></div>
+           <div class="checkrow"><input type="checkbox" id=" seledata" value="Awards" name="selectedcolumn"><p>Awards</p><br></div>
+           <div class="checkrow"><input type="checkbox" id=" seledata" value="Degrees" name="selectedcolumn"><p>Degree </p><br></div>
+           <div class="checkrow"><input type="checkbox" id=" seledata" value="CompaniesWorkedat" name="selectedcolumn"><p>Company where worked </p><br></div>
+           
+            </div>
+            <div class="selectsub"><input type="submit" id="submitselect" value="Submit"></div>
+        </form>
+    </div>
+    <div class="con" id="hidetable">
+        <h1>Project Name</h1>
+        <!-- <div class="searchfix"> -->
+           
+                <div class="searcharea">
+                <input type="text" id="searchbox" class="search" placeholder=" search here " onkeyup="searchFun()">
+                <!-- 
+                <i input type="submit" class="fa fa-search"></i>
+                -->    
+                <button class="sub" ><i class="fa fa-search" ></i></button>
+                
+                </div>
+            
+        <!-- </div> -->
+        <div class="formcontent">
+        <form action="/compare" method="post" target="_blank">
+            
+            
+            <div class="buttons">
+                <div class="compbtn">
+                 <input type="submit" value="Compare" class="comp">
+                </div>
+               <div class="export">
+                <a href="#" onclick="print.window()" class="exp">Export</a>
+               </div>
+                <div class="select">
+                <a href="#" onclick="selectitem()" class="underselect">Select</a>
+               </div>
+            </div>   
+               <div class="scroll">
+                <table class="table_dis"  id="table_data">
+                    
+                    <div class="tabular" >
+                    <tr>   
+                        
+                        <th ><a onclick="uncheck()">Deselect</a> </th>    
+                        <th>Candiate Id</th>
+                        <th>Name</th>
+                        <th>Education </th>
+                        <th>Skills</th>
+                        <th>Experience</th>
+                        <!-- <th>Email</th> -->
+                        <th>rank</th>
+                        <th >Link Of Resume</th>
+                       
+                    </tr>
+                    
+                    <div class="data">
+                        {% set count = namespace(value=1) %}
+                        
+                    {% for data in row %}
+                    
+                        {% set can_id = 'id' + count.value | string() %}
+
+                        {% set count.value = count.value + 1 %}
+                        <tr class=" {{data[0]}} tablerow">
+                            
+                            <!-- <td class="check" id="{{count.value-1}}"><input type="checkbox" class="checkit" name="check" value="{{count.value-1}}"></td> -->
+                            <td class="check" id="{{data[0]}}"><div class="rowitem"><input type="checkbox" class="checkit" name="check" value="{{data[0]}}"></div></td>
+
+                        {% for item in data %} 
+                        
+                        
+                        <td><div class="rowitem">{{item}}</div></td>
+                        
+                        
+                        {% endfor %}
+                        <td><div class="rowitem"><a href="/summary/{{data[0]}}">resume</a></div></td>
+                        </tr>
+                    
+                    {% endfor %}
+                    </div>
+                    </div>
+                </table>
+                
+            </div>
+            
+        </form>
+
+    </div>
+    <div class="settingrank">
+    <a href="/setting" class="innerrankcon" >Let's Find</a>
+    </div>
+    </div>
+    <script>
+        function uncheck(){
+            var uncheck=document.getElementsByTagName('input');
+        for(var i=0;i<uncheck.length;i++)
+        {
+         if(uncheck[i].type=='checkbox')
+            {
+                uncheck[i].checked=false;
+            }
+        }
+        }
+
+        function selectitem(){
+            document.getElementById('bodyselect').style.display="block";
+             document.getElementById('hidetable').style.display="None";
+            // document.getElementById('table_data').style.display="None";
+            // document.getElementsByClassName('con').style.display="None"
+
+        }
+
+    </script>
+</body>
+</html>

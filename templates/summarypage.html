@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='summarypage.css') }}"> -->
     <link rel="stylesheet" href="../static/summarypage.css">
-    
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/2360843bb3.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <!-- <script src="static\table2.js"></script> -->
@@ -19,7 +19,7 @@
             <li class="logo1"><a href="/upload2"><img src="../static/image\4.png" class="home"></a></li>
             <li class="logo1"><a href="/table"><img src="../static/image/3.png" class="candiate"></a></li>
             <li class="logo1"><a href="/statistic"><img src="../static/image/1.png" class="statistic"></a></li>
-            <li class="logo1"><a href="#"><img src="../static/image/2.png" class="setting1"></a></li>
+            <li class="logo1"><a href="/setting"><img src="../static/image/2.png" class="setting1"></a></li>
             <li class="logo1"><a href="#"><img src="../static/image/5.png" class="setting"></a></li>
             <li class="logo1"><a href="#"><img src="../static/image/acc.png" class="account"></a></li>
 
@@ -34,21 +34,137 @@
             {% for data in cont %}
             <div class="subtittle"><p>Candiate Id : </p></div>
             <div class="datacontent"><div class="innercontent">{{data[0]}}</div></div>
-            <div class="subtittle"><p>Candiate Name : </p></div>
+
+            {% if (data[1] != "Null") and (data[1] != None) and (data[1] != "null") %}
+            <div class="subtittle"><p>Candiate Name: </p></div>
             <div class="datacontent"><div class="innercontent">{{data[1]}}</div></div>
-            <div class="subtittle"><p>Education : </p></div>
+            {% endif %}
+            
+            {% if (data[2] != "Null") and (data[2] != None) and (data[2] != "null") %}
+            <div class="subtittle"><p>Phone Number: </p></div>
             <div class="datacontent"><div class="innercontent">{{data[2]}}</div></div>
-            {% if (data[3] != "Null") and (data[3] != None) and (data[3] != "null") %}
-                <div class="subtittle"><p>Skills: </p></div>
-                <div class="datacontent"><div class="innercontent">{{data[3]}}</div></div>
             {% endif %}
 
-            <div class="subtittle"><p>Experience : </p></div>
+            {% if (data[3] != "Null") and (data[3] != None) and (data[3] != "null") %}
+            <div class="subtittle"><p>Email-Id: </p></div>
+            <div class="datacontent"><div class="innercontent"><a href="mailto:{{data[3]}}">{{data[3]}}</a></div></div>
+            {% endif %}
+
+            {% if (data[4] != "Null") and (data[4] != None) and (data[4] != "null") %}
+            <div class="subtittle"><p>Gender: </p></div>
             <div class="datacontent"><div class="innercontent">{{data[4]}}</div></div>
-            <div class="subtittle"><p>Email Id : </p></div>
+            {% endif %}
+
+            {% if (data[5] != "Null") and (data[5] != None) and (data[5] != "null") %}
+            <div class="subtittle"><p>Date Of Birth: </p></div>
             <div class="datacontent"><div class="innercontent">{{data[5]}}</div></div>
-            <div class="subtittle"><p>link : </p></div>
-            <div class="datacontent"><div class="innercontent">{{data[5]}}</div></div>
+            {% endif %}
+
+            {% if (data[6] != "Null") and (data[6] != None) and (data[6] != "null") %}
+            <div class="subtittle"><p>Location: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[6]}}</div></div>
+            {% endif %}
+
+            {% if (data[7] != "Null") and (data[7] != None) and (data[7] != "null") %}
+            <div class="subtittle"><p>Pincode: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[7]}}</div></div>
+            {% endif %}
+
+
+            {% if (data[8] != "Null") and (data[8] != None) and (data[8] != "null") %}
+            <div class="subtittle"><p>Current Job: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[8]}}</div></div>
+            {% endif %}
+
+            {% if (data[9] != "Null") and (data[9] != None) and (data[9] != "null") %}
+            <div class="subtittle"><p>Total Experience: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[9]}}</div></div>
+            {% endif %}
+
+            {% if (data[10] != "Null") and (data[10] != None) and (data[10] != "null") %}
+            <div class="subtittle"><p>Designation: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[10]}}</div></div>
+            {% endif %}
+
+            {% if (data[11] != "Null") and (data[11] != None) and (data[11] != "null") %}
+            <div class="subtittle"><p>Company: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[11]}}</div></div>
+            {% endif %}
+
+            {% if (data[12] != "Null") and (data[12] != None) and (data[12] != "null") %}
+            <div class="subtittle"><p>Experience Year: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[12]}}</div></div>
+            {% endif %}
+
+            {% if (data[13] != "Null") and (data[13] != None) and (data[13] != "null") %}
+            <div class="subtittle"><p>Projects: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[13]}}</div></div>
+            {% endif %}
+
+
+            {% if (data[14] != "Null") and (data[14] != None) and (data[14] != "null") %}
+            <div class="subtittle"><p>Degrees: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[14]}}</div></div>
+            {% endif %}
+
+            {% if (data[15] != "Null") and (data[15] != None) and (data[15] != "null") %}
+            <div class="subtittle"><p>College: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[15]}}</div></div>
+            {% endif %}
+
+            {% if (data[16] != "Null") and (data[16] != None) and (data[16] != "null") %}
+            <div class="subtittle"><p>Year Of Passout: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[16]}}</div></div>
+            {% endif %}
+
+            {% if (data[17] != "Null") and (data[17] != None) and (data[17] != "null") %}
+            <div class="subtittle"><p>Training/Courses: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[17]}}</div></div>
+            {% endif %}
+
+            {% if (data[18] != "Null") and (data[18] != None) and (data[18] != "null") %}
+            <div class="subtittle"><p>Publications: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[18]}}</div></div>
+            {% endif %}
+
+            {% if (data[19] != "Null") and (data[19] != None) and (data[19] != "null") %}
+            <div class="subtittle"><p>Skills: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[19]}}</div></div>
+            {% endif %}
+
+
+            {% if (data[20] != "Null") and (data[20] != None) and (data[20] != "null") %}
+            <div class="subtittle"><p>Reference: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[20]}}</div></div>
+            {% endif %}
+
+
+            {% if (data[21] != "Null") and (data[21] != None) and (data[21] != "null") %}
+            <div class="subtittle"><p>Awards: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[21]}}</div></div>
+            {% endif %}
+
+            {% if (data[22] != "Null") and (data[22] != None) and (data[22] != "null") %}
+            <div class="subtittle"><p>University: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[22]}}</div></div>
+            {% endif %}
+
+
+            {% if (data[23] != "Null") and (data[23] != None) and (data[23] != "null") %}
+            <div class="subtittle"><p>Degree: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[23]}}</div></div>
+            {% endif %}
+
+            {% if (data[24] != "Null") and (data[24] != None) and (data[24] != "null") %}
+            <div class="subtittle"><p>Companies Worked At: </p></div>
+            <div class="datacontent"><div class="innercontent">{{data[24]}}</div></div>
+            {% endif %}
+
+
+
+            
+
+            
             
             {% endfor %} 
 
@@ -100,9 +216,30 @@
             {% endif %}
 
             {% endfor %}
-            <div class="subtittle"><p>Summarry : </p></div>
-        
-            <div class="datacontent"><div class="innercontent">Summary is</div></div>
+
+            {% for git in gitdata %}
+
+            {% if (git[0] != "Link Not Found") and (git[0] != "Technical issue") %}
+            <div class="litittle"><div><p class="Linkedln">Github Profile</p></div></div> 
+            {% if (git[0] != "null") and (git[0] != "Null") and (git[0] !="") %}
+            <div class="subtittle"><p>Projects : </p></div>
+           <div class="datacontent"><div class="innercontent">{{git[0]}}</div></div>
+           {% endif %}
+           {% endif %}
+           {% endfor %}
+           
+           
+
+           {% for sum in summary %}
+
+            {% if (sum[0] != "Link Not Found") and (sum[0] != "Technical issue") %}
+            <div class="litittle"><div><p class="Linkedln">Summary</p></div></div> 
+            {% if (sum[0] != "null") and (sum[0] != "Null") and (sum[0] !="") %}
+            <div class="subtittle"><p>Summary: </p></div>
+           <div class="datacontent"><div class="innercontent">{{sum[0]}}</div></div>
+           {% endif %}
+           {% endif %}
+           {% endfor %}
             
         </div>
         <div class="resumelink">
