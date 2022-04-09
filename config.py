@@ -3,6 +3,8 @@ import os
 import spacy
 basepath = os.path.dirname(os.path.realpath(__file__))
 
+API_LINK = "https://c3eb-59-160-23-100.ngrok.io/scrape="
+
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 #change accordinly
 summary_model = '/Users/cosmos/Documents/DP-ref/Summary-100'

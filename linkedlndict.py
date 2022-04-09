@@ -1,6 +1,9 @@
 def linkedlndb(value):
-    if(value=='null'):
+  try:
+    if(len(value)==0):
         return 'null'
     else:
-        str1 = " "
-        return (str1.join(value))
+        str1 = " , ".join(map(str,value))
+        return (str(str1))
+  except:
+    return 'null'

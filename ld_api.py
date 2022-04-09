@@ -1,3 +1,5 @@
+from flask import Flask
+from flask_restful import Resource, Api
 from time import time
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -5,6 +7,16 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import hashlib
 from preprocessing import linkdien_clean, summary_clean
+from flask import Flask, request, jsonify, render_template
+import time
+
+app = Flask(__name__)
+api = Api(app)
+
+
+def format_server_time():
+    server_time = time.localtime()
+    return time.strftime("%I:%M:%S %p", server_time)
 
 
 def emptyB():
@@ -70,19 +82,13 @@ def linked_in_scrap(LINK):
     emptyBClean()
 
     # PATH to chrome driver
-    # ser = Service(AD_CHROME_PATH)
-    # op = webdriver.ChromeOptions()
-    # driver = webdriver.Chrome(service=ser, options=op)
-    # chrome_options = webdriver.ChromeOptions()
-    # chrome_options.add_argument('--headless')
-    # chrome_options.add_argument('--no-sandbox')
-    # chrome_options.add_argument('--disable-dev-shm-usage')
-    bl = "/usr/bin/google-chrome"
+    bl = "/Users/cosmos/chromedriver"
     option = webdriver.ChromeOptions()
     option.bl = bl
-    driver = webdriver.Chrome(executable_path=r'/usr/bin/chromedriver', options=option)
+    driver = webdriver.Chrome(
+        executable_path=r'/Users/cosmos/chromedriver', options=option)
     #driver = webdriver.Chrome('chromedriver',chrome_options=op)
-    
+
     # USERNAME AND PASSWORD
     USERNAME = 'omsurve570@gmail.com'
     PASSWORD = 'lucario123'
@@ -142,7 +148,7 @@ def linked_in_scrap(LINK):
             '/html/body/div[6]/div[3]/div/div/div[2]/div/div/main/section[13]').text
 
     except Exception as e:
-        print('error:::::::',e)
+        print('error:::::::', e)
 
     finally:
         print('First Box :' + firstBox)
@@ -209,7 +215,7 @@ def linked_in_scrap(LINK):
         removeWords()
 
         elements = ['Highlights', 'About', 'Activity', 'Education', 'Experience', 'Licenses & certifications', 'Skills',
-                    'Projects', 'Honors & awards', 'Languages', 'Interests', 'Causes', 'Featured','Volunteering']
+                    'Projects', 'Honors & awards', 'Languages', 'Interests', 'Causes', 'Featured', 'Volunteering']
 
         my_dict = {}
         for i in range(14):
@@ -229,8 +235,22 @@ def linked_in_scrap(LINK):
         my_dict = linkdien_clean(my_dict)
         return my_dict
 
+# Index
 
-# emptyB()
-# emptyBClean()
-# print(linked_in_scrap("https://www.linkedin.com/in/tanishq-parkar/"))
-# github_scrape(link)
+
+@app.route('/index')
+def index():
+    context = {'server_time': format_server_time()}
+    return render_template('index.html', context=context)
+
+
+@app.route('/scrape=<link>', methods=["POST", "GET"])
+def linkdien(link):
+    new = bytes.fromhex(link).decode('utf-8')
+    print(new)
+    final = linked_in_scrap(new)
+    return final
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

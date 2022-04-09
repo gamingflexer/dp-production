@@ -5,6 +5,7 @@ tika
 selenium
 BeautifulSoup4
 fitz
+mysql
 opencv-python
 fpdf
 docx2pdf
@@ -14,8 +15,11 @@ Pillow
 pdfkit
 textract
 fpdf
-nltk 
+nltk
+flask_mysqldb
+spacy==2.3.5
 torch
+pymysql
 pyap
 huggingface_hub==0.2.1
 nameparser

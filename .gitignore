@@ -5,6 +5,7 @@ __pycache__/
 testXX.ipynb
 models/outputs-100-out-lenght
 
+
 # C extensions
 *.so
 
@@ -131,3 +132,7 @@ dmypy.json
 .pyre/
 text.ipynb
 test.py
+models/outputs-100-out-lenght.zip
+githubs.py
+.gitignore
+githubs.py

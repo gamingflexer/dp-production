@@ -89,7 +89,7 @@ def spacy_700(path):
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
 
-def summary(text, model_summary):
+def summary_model(text, model_summary):
     # add pre-processed text (no hex one)
     text_to_summarize = f"""summarize:{text}"""
     summary = model_summary.predict(text_to_summarize)

@@ -1,12 +1,11 @@
-Licenses & certifications
-Basic Problem Solving(Programming)
-HackerRank
-Issued Sep 2021 · No Expiration Date
-Credential ID d3be82a912ca
-Show credential
-Front-End Web UI Frameworks and Tools: Bootstrap 4
-Coursera
-Credential ID N4MNEDM99NC9
-Introduction to Programming Using Python
-Credential ID 08d70622e1c0
-Show all 4 licenses & certifications
+Skills
+JavaScript
+· 5
+Passed LinkedIn Skill Assessment
+CSS3
+· 15
+Endorsed by 2 colleagues at Almadots
+Endorsed by 2 colleagues atAlmadots
+HTML5
+· 17
+Show all 14 skills
