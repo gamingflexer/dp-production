@@ -12,7 +12,7 @@ pip install -r requirments_mac.txt
 python app.py
 ```
 
-collab notebook link share - ```coming soon```
+collab notebook link share - ```https://colab.research.google.com/drive/1ph8IcCRD5ewWpiLALoLvEBmmJ7LTSrJ0?usp=sharing```
 
 
 # deepblue-api
